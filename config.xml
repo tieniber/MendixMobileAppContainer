@@ -40,6 +40,7 @@
 	-->
 	<preference name="AutoHideSplashScreen" value="false" />
 	<preference name="SplashMaintainAspectRatio" value="true" />
+	<preference name="FadeSplashScreenDuration" value="250"/>
 	<preference name="ShowSplashScreenSpinner" value="false"/>
 	
 	<!--
