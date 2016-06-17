@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 	<widget xmlns = "http://www.w3.org/ns/widgets"
 		xmlns:gap = "http://phonegap.com/ns/1.0"
+		xmlns:android="http://schemas.android.com/apk/res/android"
 		id        = "com.mendixcloud.adpinnovation2"
 		version   = "0.0.5" >
 
@@ -141,4 +142,9 @@
 
 	<gap:plugin name="cordova-plugin-file-transfer" source="npm" version="1.2.0" />
 	<gap:plugin name="cordova-sqlite-storage" source="npm" version="0.7.10" />
+	
+	<!-- Enable Android debugging -->
+	<gap:config-file platform="android" parent="/manifest">
+		<application android:debuggable="true" />
+	</gap:config-file>
 </widget>
