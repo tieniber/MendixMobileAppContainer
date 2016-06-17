@@ -49,6 +49,9 @@
 	<!-- Stop the app from overscrolling and looking all bouncy -->
 	<preference name="DisallowOverscroll" value="true" />
 	
+	<!-- Auto-focused fields in iOS get semi-focused: no keyboard but they're highlighted which is no good -->
+	<preference name="KeyboardDisplayRequiresUserAction" value="false" />
+	
 	<!-- allow assets to be loaded and open links in the app itself, see: http://phonegap.com/blog/2012/03/20/access-tags/ -->
 	<!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
 	<access origin="*" />
