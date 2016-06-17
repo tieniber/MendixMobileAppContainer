@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Giggit</title>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, height=device-height">
+        <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, maximum-scale=1">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
 
@@ -45,6 +45,8 @@
                 mxapp.initialize("http://tieniber.ddns.net:8080", enableOffline);
             });
         </script>
-
+		<script type="text/javascript">
+			document.write( '<style>.hiding-footer{visibility:hidden}@media(min-height:' + ($( window ).height() - 10) + 'px){.hiding-footer{visibility:visible}}</style>' );
+		</script>
     </body>
 </html>
