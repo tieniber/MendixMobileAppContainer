@@ -114,29 +114,29 @@
 	<gap:platform name="android" />
 
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-ldpi.png" gap:platform="android" gap:density="land-ldpi"/>
+	<gap:splash src="res/android/land-ldpi.png" gap:platform="android" gap:density="ldpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<icon src="res/android/ldpi.png" gap:platform="android" gap:density="ldpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-hdpi.png" gap:platform="android" gap:density="land-hdpi"/>
+	<gap:splash src="res/android/land-hdpi.png" gap:platform="android" gap:density="hdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/port-ldpi.png" gap:platform="android" gap:density="port-ldpi"/>
+	<gap:splash src="res/android/port-ldpi.png" gap:platform="android" gap:density="ldpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<icon src="res/android/xxhdpi.png" gap:platform="android" gap:density="xxhdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/port-mdpi.png" gap:platform="android" gap:density="port-mdpi"/>
+	<gap:splash src="res/android/port-mdpi.png" gap:platform="android" gap:density="mdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/port-xhdpi.png" gap:platform="android" gap:density="port-xhdpi"/>
+	<gap:splash src="res/android/port-xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<icon src="res/android/hdpi.png" gap:platform="android" gap:density="hdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-xhdpi.png" gap:platform="android" gap:density="land-xhdpi"/>
+	<gap:splash src="res/android/land-xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<icon src="res/android/xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-mdpi.png" gap:platform="android" gap:density="land-mdpi"/>
+	<gap:splash src="res/android/land-mdpi.png" gap:platform="android" gap:density="mdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/port-hdpi.png" gap:platform="android" gap:density="port-hdpi"/>
+	<gap:splash src="res/android/port-hdpi.png" gap:platform="android" gap:density="hdpi"/>
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<icon src="res/android/mdpi.png" gap:platform="android" gap:density="mdpi"/>
 
