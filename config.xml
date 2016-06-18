@@ -85,20 +85,20 @@
 	
 	<gap:platform name="ios" />
 
-	<icon src="res/ios/icon-50@2x.png" gap:platform="ios" width="100" height="100" />
 	<gap:splash src="res/ios/Default@2x.png" gap:platform="ios" width="640" height="960" />
 	<gap:splash src="res/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1024" />
-	<icon src="res/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
 	<gap:splash src="res/ios/Default-Landscape@2x.png" gap:platform="ios" width="2048" height="1536" />
-	<icon src="res/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
-	<icon src="res/ios/icon-small@2x.png" gap:platform="ios" width="58" height="58" />
-	<icon src="res/ios/icon-small.png" gap:platform="ios" width="29" height="29" />
 	<gap:splash src="res/ios/Default-Portrait@2x.png" gap:platform="ios" width="1536" height="2048" />
 	<gap:splash src="res/ios/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
 	<gap:splash src="res/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="768" />
+	<gap:splash src="res/ios/Default.png" gap:platform="ios" width="320" height="480" />
+	<icon src="res/ios/icon-50@2x.png" gap:platform="ios" width="100" height="100" />
+	<icon src="res/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
+	<icon src="res/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+	<icon src="res/ios/icon-small@2x.png" gap:platform="ios" width="58" height="58" />
+	<icon src="res/ios/icon-small.png" gap:platform="ios" width="29" height="29" />
 	<icon src="res/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
 	<icon src="res/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
-	<gap:splash src="res/ios/Default.png" gap:platform="ios" width="320" height="480" />
 	<icon src="res/ios/icon-40@2x.png" gap:platform="ios" width="80" height="80" />
 	<icon src="res/ios/icon-40.png" gap:platform="ios" width="40" height="40" />
 	<icon src="res/ios/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
@@ -114,34 +114,21 @@
 	<gap:platform name="android" />
 
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-ldpi.png" gap:platform="android" gap:density="ldpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<icon src="res/android/ldpi.png" gap:platform="android" gap:density="ldpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-hdpi.png" gap:platform="android" gap:density="hdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/land-ldpi.png" gap:platform="android" gap:density="land-ldpi"/>
+	<gap:splash src="res/android/land-hdpi.png" gap:platform="android" gap:density="land-hdpi"/>
+	<gap:splash src="res/android/land-xhdpi.png" gap:platform="android" gap:density="land-xhdpi"/>
+	<gap:splash src="res/android/land-mdpi.png" gap:platform="android" gap:density="land-mdpi"/>
 	<gap:splash src="res/android/port-ldpi.png" gap:platform="android" gap:density="ldpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<icon src="res/android/xxhdpi.png" gap:platform="android" gap:density="xxhdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<gap:splash src="res/android/port-mdpi.png" gap:platform="android" gap:density="mdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<gap:splash src="res/android/port-xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<icon src="res/android/hdpi.png" gap:platform="android" gap:density="hdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<icon src="res/android/xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-mdpi.png" gap:platform="android" gap:density="mdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
 	<gap:splash src="res/android/port-hdpi.png" gap:platform="android" gap:density="hdpi"/>
-	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	
+	<icon src="res/android/ldpi.png" gap:platform="android" gap:density="ldpi"/>
+	<icon src="res/android/xxhdpi.png" gap:platform="android" gap:density="xxhdpi"/>
+	<icon src="res/android/hdpi.png" gap:platform="android" gap:density="hdpi"/>
+	<icon src="res/android/xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
 	<icon src="res/android/mdpi.png" gap:platform="android" gap:density="mdpi"/>
-
-
-
+	
 	<gap:plugin name="cordova-plugin-file-transfer" source="npm" version="1.2.0" />
 	<gap:plugin name="cordova-sqlite-storage" source="npm" version="0.7.10" />
 	
