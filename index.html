@@ -43,7 +43,7 @@
 
             // Make sure to include the scheme (e.g. http://) in the URL.
             document.addEventListener("deviceready", function() {
-				FastClick.attach(document.body);
+				Origami.fastclick(document.body);
                 mxapp.initialize("http://10.140.149.136:8080", enableOffline);
             });
         </script>
