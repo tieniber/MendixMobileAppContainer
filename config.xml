@@ -23,7 +23,7 @@
 	of our app.
 	-->
 	<preference name="StatusBarOverlaysWebView" value="false" />
-	<preference name="StatusBarBackgroundColor" value="#441256" />
+	<preference name="StatusBarBackgroundColor" value="#5596e6" />
 
 	<!--
 	Set proper defaults for `cordova.file.dataDirectory`.
