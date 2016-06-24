@@ -81,7 +81,7 @@
 	<gap:plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
 	<gap:plugin name="cordova-plugin-spinnerdialog" source="npm" />
 	<gap:plugin name="cordova-plugin-touch-id" source="npm"/>
-	<gap:plugin name="cordova-plugin-pindialog" source="npm"/>
+	<gap:plugin name="cordova-plugin-pin-dialog-et" source="npm"/>
 	
 	<gap:platform name="ios" />
 
