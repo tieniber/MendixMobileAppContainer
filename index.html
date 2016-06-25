@@ -38,14 +38,7 @@
         <script src="cordova.js"></script>
         <script src="js/bundle.js"></script>
 		<script src='js/fastclick.min.js'></script>
-        <script>
-            dojoConfig = {
-                baseUrl: "mxclientsystem/dojo/",
-                cacheBust: "635943246762522000",
-                rtlRedirect: "index-rtl.html"
-            };
-        </script>		
-        <script src="js/mxui.js?635943246762522000"></script>		
+		
         <script>
             var enableOffline = false;
 			
@@ -62,22 +55,20 @@
 			}
 			
 			if (window.localStorage && window.localStorage.loginToken) {
-				var xhrArgs = {
-					url: "http://tieniber.ddns.net:8080/login/" + window.localStorage.loginToken,
-					handleAs: "text",
-					load: function(data){
-						//location.reload();
-						windows.startApp();
-					},
-					error: function(error){
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						window.startApp();
+					} else {
 						window.localStorage.removeItem("loginToken");
 						window.startApp();
-					},
-					withCredentials: true
+					}
 				};
-				var deferred = dojo.xhrGet(xhrArgs);
+				xhr.open("GET", "http://tieniber.ddns.net:8080/login/" + window.localStorage.loginToken, true);
+				xhr.withCredentials = true;
+				xhr.send();
 			} else {
-				
+				window.startApp();
 			}
         </script>
 		<script type="text/javascript">
