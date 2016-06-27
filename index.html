@@ -57,11 +57,13 @@
 			if (window.localStorage && window.localStorage.loginToken) {
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function() {
-					if (xhr.readyState == 4 && xhr.status == 200) {
-						window.startApp();
-					} else {
-						window.localStorage.removeItem("loginToken");
-						window.startApp();
+					if (xhr.readyState == 4) {
+						if (xhr.status == 200) {
+							window.startApp();
+						} else {
+							window.localStorage.removeItem("loginToken");
+							window.startApp();
+						}
 					}
 				};
 				xhr.open("GET", "http://tieniber.ddns.net:8080/login/" + window.localStorage.loginToken, true);
