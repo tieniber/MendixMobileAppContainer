@@ -198,7 +198,7 @@
 	        // own styles and scripts until mx exists.  We need to hold on to our own styles as long as we
 	        // show a progress message.
 	        addScripts(url, config.cachebust, config.files.js);
-	        pollUntil(200, 20, function() {
+	        pollUntil(200, 100, function() {
 	            return typeof mx !== "undefined";
 	        }, function() {
 	            removeSelf();
@@ -398,12 +398,12 @@
 	            .then(unpackageWithCleanup, handleFailedDownload);
 	}
 
-	function synchronizeResources(url, shouldDownloadFn) {
+	function synchronizeResources(url, enableOffline) {
 	    var sourceUri = encodeURI(url + "resources.zip"),
 	        destinationUri = cacheDirectory + "resources.zip";
 
 	    return getRemoteConfig().then(function(remoteResult) {
-	        if (shouldDownloadFn(remoteResult)) {
+	        if (enableOffline) {
 	            var wrappedCallback = function() {
 	                return BPromise.resolve([ remoteResult, resourcesDirectory ]);
 	            };
@@ -483,12 +483,7 @@
 
 	            setupDirectoryLocations();
 
-	            var shouldDownloadFn = function(config) {
-	                return cordova.platformId !== "windowsphone" &&
-	                    (config.downloadResources || enableOffline);
-	            };
-
-	            synchronizeResources(appUrl, shouldDownloadFn)
+	            synchronizeResources(appUrl, enableOffline)
 	                .spread(function(config, resourcesUrl) {
 	                    return startup(config, resourcesUrl, appUrl, enableOffline);
 	                })
@@ -5406,40 +5401,12 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
-	  }
-	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
 	var queueIndex = -1;
 
 	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -5455,7 +5422,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = setTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -5472,7 +5439,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    clearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -5484,7 +5451,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        setTimeout(drainQueue, 0);
 	    }
 	};
 
