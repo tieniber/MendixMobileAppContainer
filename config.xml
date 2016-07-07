@@ -83,7 +83,7 @@
 	<gap:plugin name="cordova-plugin-touch-id" source="npm"/>
 	<gap:plugin name="cordova-plugin-pin-dialog-et" source="npm"/>
 	<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
-
+	<gap:plugin name="cordova-plugin-ios-longpress-fix" source="npm" />
 	
 	<gap:platform name="ios" />
 
