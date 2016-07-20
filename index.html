@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>wrksavvy</title>
+        <title>WrkSavvy</title>
         <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, maximum-scale=1">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
@@ -37,10 +37,10 @@
 
         <script src="cordova.js"></script>
         <script src="js/bundle.js"></script>
-		
+
         <script>
             var enableOffline = false;
-			
+
 			window.startApp = function() {
 				document.addEventListener("deviceready", function() {
 					//if the splashscreen plugin exists, show it.
@@ -48,10 +48,10 @@
 						navigator.splashscreen.show();
 					}
 					// Make sure to include the scheme (e.g. http://) in the URL.
-					mxapp.initialize("http://tieniber.ddns.net:8080", enableOffline);
+					mxapp.initialize("https://adpinnovation2-accp.mendixcloud.com", enableOffline);
 				});
 			}
-			
+
 			if (window.localStorage && window.localStorage.loginToken) {
 				var params = "loginToken=" + window.localStorage.loginToken;
 				var xhr = new XMLHttpRequest();
@@ -65,7 +65,7 @@
 						}
 					}
 				};
-				xhr.open("POST", "http://tieniber.ddns.net:8080/login/", true);
+				xhr.open("POST", "https://adpinnovation2-accp.mendixcloud.com/login/", true);
 				xhr.withCredentials = true;
 				xhr.send(params);
 			} else {
