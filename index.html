@@ -52,6 +52,13 @@
 				});
 			}
 
+<<<<<<< HEAD
+            // Make sure to include the scheme (e.g. http://) in the URL.
+            document.addEventListener("deviceready", function() {
+				Origami.fastclick(document.body);
+                mxapp.initialize("http://10.140.149.137:8080", enableOffline);
+            });
+=======
 			if (window.localStorage && window.localStorage.loginToken) {
 				var params = "loginToken=" + window.localStorage.loginToken;
 				var xhr = new XMLHttpRequest();
@@ -71,6 +78,7 @@
 			} else {
 				window.startApp();
 			}
+>>>>>>> tieniber/master
         </script>
 		<script type="text/javascript">
 			document.write( '<style>.hiding-footer{display:none}@media(min-height:' + (window.innerHeight - 50) + 'px){.hiding-footer{display:block}}</style>' );
