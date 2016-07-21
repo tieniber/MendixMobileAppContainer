@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>WrkSavvy</title>
+        <title>Wrksavvy</title>
         <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1, maximum-scale=1">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
@@ -48,7 +48,7 @@
 						navigator.splashscreen.show();
 					}
 					// Make sure to include the scheme (e.g. http://) in the URL.
-					mxapp.initialize("https://adpinnovation2-accp.mendixcloud.com", enableOffline);
+					mxapp.initialize("http://tieniber.ddns.net:8080", enableOffline);
 				});
 			}
 
@@ -65,7 +65,7 @@
 						}
 					}
 				};
-				xhr.open("POST", "https://adpinnovation2-accp.mendixcloud.com/login/", true);
+				xhr.open("POST", "http://tieniber.ddns.net:8080/login/", true);
 				xhr.withCredentials = true;
 				xhr.send(params);
 			} else {
