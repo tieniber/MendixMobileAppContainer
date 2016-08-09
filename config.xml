@@ -41,10 +41,11 @@
 	<!--
 	Don't hide the splash screen automatically. Instead, wait until we have content available. This requires that we unload the splash screen using custom code or a widget.
 	-->
-	<preference name="AutoHideSplashScreen" value="false" />
+	<preference name="AutoHideSplashScreen" value="true" />
 	<preference name="SplashMaintainAspectRatio" value="true" />
 	<preference name="FadeSplashScreenDuration" value="250"/>
 	<preference name="ShowSplashScreenSpinner" value="false"/>
+	<preference name="SplashScreenDelay" value="5000"/> 
 	<!-- Android splash screen isn't showing -->
 	<preference name="SplashScreen" value="screen" />
 
