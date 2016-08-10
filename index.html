@@ -28,8 +28,8 @@
             <div id="mx-loader-container" class="mx-valign-table">
                 <div class="mx-valign-cell">
                     <div class="mx-loader">
-                        <img src="img/loader.gif" />
-                        <div class="mx-message"></div>
+                        <img src="img/wrksavvy-logo.png" />
+                        <div class="mx-message"> </div>
                     </div>
                 </div>
             </div>
@@ -44,9 +44,9 @@
 			window.startApp = function() {
 				document.addEventListener("deviceready", function() {
 					//if the splashscreen plugin exists, show it.
-					if (navigator && navigator.splashscreen) {
-						navigator.splashscreen.show();
-					}
+					//if (navigator && navigator.splashscreen) {
+					//	navigator.splashscreen.show();
+					//}
 					// Make sure to include the scheme (e.g. http://) in the URL.
 					mxapp.initialize("https://adpinnovation2-accp.mendixcloud.com", enableOffline);
 				});

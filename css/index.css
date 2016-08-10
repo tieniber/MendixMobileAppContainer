@@ -62,8 +62,13 @@ body {
 .mx-loader img {
     display: block;
     margin: 0 auto;
+    max-width:100%;
+    max-height:100%;
 }
 .mx-loader .mx-message {
     text-align: center;
     padding: 4px 0;
+    color: #5596e6;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
 }
