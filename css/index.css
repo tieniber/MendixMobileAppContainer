@@ -58,6 +58,7 @@ body {
 .mx-valign-cell {
     display: table-cell;
     vertical-align: middle;
+    padding-bottom: 130px;
 }
 .mx-loader img {
     display: block;
