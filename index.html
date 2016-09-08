@@ -64,7 +64,7 @@
 			    // Handle direct calls like window.open("url","_blank")
 			    window.open = function(url,target,options) {
 			        if ( target == "_top" ) systemOpen(url,options);
-			        else windowOpen(url,target,options);
+			        else return windowOpen(url,target,options);
 			    };
 
 			    // Handle html links like <a href="url" target="_blank">
