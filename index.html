@@ -50,7 +50,7 @@
 			    // Currently (for retrocompatibility reasons) the plugin automagically wrap window.open
 			    // We don't want the plugin to always be run: we want to call it explicitly when needed
 			    // See https://issues.apache.org/jira/browse/CB-9573
-			    delete window.open; // scary, but it just sets back to the default window.open behavior
+			    //delete window.open; // scary, but it just sets back to the default window.open behavior
 			    var windowOpen = window.open; // Yes it is not deleted !
 
 			    // Note it does not take a target!
