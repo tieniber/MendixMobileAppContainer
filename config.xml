@@ -3,7 +3,7 @@
 		xmlns:gap = "http://phonegap.com/ns/1.0"
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		id        = "com.mendixcloud.adpinnovation2"
-		version   = "0.0.8" >
+		version   = "1.0.0" >
 
 	<name>Wrksavvy</name>
 
@@ -16,7 +16,7 @@
 	Instead, Phonegap Build derives the platform versions from the CLI
 	defaults.
 	-->
-	<preference name="phonegap-version" value="cli-5.2.0" />
+	<preference name="phonegap-version" value="cli-6.3.0" />
 
 	<!--
 	On iOS, the statusbar is transparent by default and is drawn over the top
