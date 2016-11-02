@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 	<widget xmlns = "http://www.w3.org/ns/widgets"
 		xmlns:gap = "http://phonegap.com/ns/1.0"
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		id        = "com.mendixcloud.adpinnovation2"
-		version   = "0.0.8" >
+		id        = "com.mendixcloud.wrksavvy"
+		version   = "0.0.1" >
 
 	<name>ET</name>
 
@@ -16,131 +15,131 @@
 	Instead, Phonegap Build derives the platform versions from the CLI
 	defaults.
 	-->
-	<preference name="phonegap-version" value="cli-5.2.0" />
+	<preference name="phonegap-version" value="cli-6.3.0" />
+
 
 	<!--
 	On iOS, the statusbar is transparent by default and is drawn over the top
 	of our app.
 	-->
 	<preference name="StatusBarOverlaysWebView" value="false" />
-	<preference name="StatusBarBackgroundColor" value="#5596e6" />
+	<preference name="StatusBarBackgroundColor" value="#000000" />
 
+	<preference name="DisallowOverscroll" value="true" />
+
+	<preference name="webviewbounce" value="false" />
 	<!--
 	Set proper defaults for `cordova.file.dataDirectory`.
 	-->
-	<preference name="AndroidPersistentFileLocation" value="Internal" />
 	<preference name="iosPersistentFileLocation" value="Library" />
 
+	<!--
+	Set proper keyboard action for Apple device.
+	-->
+	<preference name="KeyboardDisplayRequiresUserAction" value="false" />
 	<!--
 	Disable backup to iCloud on iOS.
 	-->
 	<preference name="BackupWebStorage" value="none" />
 
-	<!-- need some build tool preference for Android to make sure notifications work -->
-	<preference name="android-build-tool" value="gradle" />
 	<!--
-	Don't hide the splash screen automatically. Instead, wait until we have content available. This requires that we unload the splash screen using custom code or a widget.
+	The gradle build tool is required for the phonegap-plugin-push
 	-->
-	<preference name="AutoHideSplashScreen" value="true" />
-	<preference name="SplashMaintainAspectRatio" value="true" />
-	<preference name="FadeSplashScreenDuration" value="250"/>
-	<preference name="ShowSplashScreenSpinner" value="false"/>
-	<preference name="SplashScreenDelay" value="300"/>
-	<!-- Android splash screen isn't showing -->
-	<preference name="SplashScreen" value="screen" />
-
-	<!-- Let's stick with portrait view. -->
-	<preference name="orientation" value="portrait" />
-
-	<!-- Stop the app from overscrolling and looking all bouncy -->
-	<preference name="DisallowOverscroll" value="true" />
+	<preference name="android-build-tool" value="gradle" />
 
 	<!-- allow assets to be loaded and open links in the app itself, see: http://phonegap.com/blog/2012/03/20/access-tags/ -->
 	<!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
 	<access origin="*" />
 
+	<gap:plugin name="com.darktalker.cordova.screenshot" source="npm" version="0.1.5" />
+	<gap:plugin name="cordova-plugin-app-version" source="npm" version="0.1.8" />
 	<gap:plugin name="cordova-plugin-battery-status" source="npm" version="1.1.2" />
 	<gap:plugin name="cordova-plugin-camera" source="npm" version="2.2.0" />
 	<gap:plugin name="cordova-plugin-console" source="npm" version="1.0.3" />
 	<gap:plugin name="cordova-plugin-contacts" source="npm" version="2.1.0" />
+	<gap:plugin name="cordova-plugin-crosswalk-webview" source="npm" version="2.1.0" />
 	<gap:plugin name="cordova-plugin-device" source="npm" version="1.1.2" />
 	<gap:plugin name="cordova-plugin-device-motion" source="npm" version="1.2.1" />
-	<!--<gap:plugin name="cordova-plugin-device-orientation" source="npm" version="1.0.1" />-->
+	<gap:plugin name="cordova-plugin-device-orientation" source="npm" version="1.0.3" />
 	<gap:plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" />
 	<gap:plugin name="cordova-plugin-file" source="npm" version="4.2.0" />
-	<!--<gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />-->
+	<gap:plugin name="cordova-plugin-file-transfer" source="npm" version="1.5.1" />
+	<gap:plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" />
 	<gap:plugin name="cordova-plugin-globalization" source="npm" version="1.0.3" />
 	<gap:plugin name="cordova-plugin-inappbrowser" source="npm" version="1.4.0" />
 	<gap:plugin name="cordova-plugin-media-capture" source="npm" version="1.3.0" />
 	<gap:plugin name="cordova-plugin-media" source="npm" version="2.3.0" />
-	<!--<gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />-->
+	<gap:plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
+	<gap:plugin name="cordova-plugin-secure-storage" source="npm" version="2.4.0" />
 	<gap:plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" version="2.1.3" />
-	<!--<gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />-->
-	<!--<gap:plugin name="cordova-plugin-zip" source="npm" version="3.1.0" />-->
+	<gap:plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" />
+	<gap:plugin name="cordova-plugin-zip" source="npm" version="3.1.0" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2" />
-	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm" version="3.0.0" />
+	<gap:plugin name="cordova-sqlite-evcore-extbuild-free" source="npm" version="0.8.0" />
+	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm" version="6.0.2" />
+	<gap:plugin name="phonegap-plugin-push" source="npm" version="1.5.3" />
 
 	<gap:plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
 	<gap:plugin name="cordova-plugin-spinnerdialog" source="npm" />
 	<gap:plugin name="cordova-plugin-touch-id" source="npm"/>
 	<gap:plugin name="cordova-plugin-pin-dialog-et" source="npm"/>
 	<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
-	<!--Too hard to paste data <gap:plugin name="cordova-plugin-ios-longpress-fix" source="npm" />-->
-	<gap:plugin name="phonegap-plugin-push" source="npm" version="1.5.3" />
+
 
 	<gap:platform name="ios" />
 
-	<!--
-	<gap:splash src="res/ios/Default@2x.png" gap:platform="ios" width="640" height="960" />
-	<gap:splash src="res/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1024" />
+	<icon src="res/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+	<icon src="res/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
 	<gap:splash src="res/ios/Default-Landscape@2x.png" gap:platform="ios" width="2048" height="1536" />
+	<icon src="res/ios/icon.png" gap:platform="ios" width="57" height="57" />
+	<icon src="res/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
+	<icon src="res/ios/icon-small@2x.png" gap:platform="ios" width="58" height="58" />
+	<icon src="res/ios/icon-50@2x.png" gap:platform="ios" width="100" height="100" />
+	<icon src="res/ios/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
+	<icon src="res/ios/icon@2x.png" gap:platform="ios" width="114" height="114" />
+	<icon src="res/ios/icon-50.png" gap:platform="ios" width="50" height="50" />
 	<gap:splash src="res/ios/Default-Portrait@2x.png" gap:platform="ios" width="1536" height="2048" />
-	<gap:splash src="res/ios/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
-	<gap:splash src="res/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="768" />
 	<gap:splash src="res/ios/Default.png" gap:platform="ios" width="320" height="480" />
-	-->
+	<gap:splash src="res/ios/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
+	<icon src="res/ios/icon-40.png" gap:platform="ios" width="40" height="40" />
+	<icon src="res/ios/icon-72@2x.png" gap:platform="ios" width="144" height="144" />
+	<gap:splash src="res/ios/Default@2x.png" gap:platform="ios" width="640" height="960" />
+	<icon src="res/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+	<gap:splash src="res/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="768" />
+	<icon src="res/ios/icon-40@2x.png" gap:platform="ios" width="80" height="80" />
+	<icon src="res/ios/icon-small.png" gap:platform="ios" width="29" height="29" />
+	<gap:splash src="res/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1024" />
 
-	<gap:splash src="res/ios/iphone_portrait_5_@2x.png" gap:platform="ios" width="640" height="1136" />
-	<gap:splash src="res/ios/iphone_portrait_6_@2x.png" gap:platform="ios" width="750" height="1334" />
-	<gap:splash src="res/ios/iphone_portrait_6p_@3x.png" gap:platform="ios" width="1242" height="2208" />
-
-
-	<icon src="res/ios/Icon.png" gap:platform="ios" width="57" height="57" />
-	<icon src="res/ios/Icon@2x.png" gap:platform="ios" width="114" height="114" />
-	<icon src="res/ios/Icon-60.png" gap:platform="ios" width="60" height="60" />
-	<icon src="res/ios/Icon-72.png" gap:platform="ios" width="72" height="72" />
-	<icon src="res/ios/Icon-72@2x.png" gap:platform="ios" width="144" height="144" />
-	<icon src="res/ios/Icon-Small-50.png" gap:platform="ios" width="50" height="50" />
-	<icon src="res/ios/Icon-Small-50@2x.png" gap:platform="ios" width="100" height="100" />
-
-	<!-- iPhone 6 -->
-	<gap:splash src="res/ios/Default-667h@2x.png" platform="ios" width="750" height="1334" />
-	<gap:splash src="res/ios/Default-Portrait-736h@3x.png" platform="ios" width="1242" height="2208" />
 
 	<gap:platform name="android" />
 
 	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-	<gap:splash src="res/android/land-ldpi.png" gap:platform="android" gap:density="land-ldpi"/>
-	<gap:splash src="res/android/land-hdpi.png" gap:platform="android" gap:density="land-hdpi"/>
-	<gap:splash src="res/android/land-xhdpi.png" gap:platform="android" gap:density="land-xhdpi"/>
-	<gap:splash src="res/android/land-mdpi.png" gap:platform="android" gap:density="land-mdpi"/>
-	<gap:splash src="res/android/port-ldpi.png" gap:platform="android" gap:density="ldpi"/>
-	<gap:splash src="res/android/port-mdpi.png" gap:platform="android" gap:density="mdpi"/>
-	<gap:splash src="res/android/port-xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
-	<gap:splash src="res/android/port-hdpi.png" gap:platform="android" gap:density="hdpi"/>
+	<gap:splash src="res/android/land-xhdpi.png" gap:platform="android" gap:qualifier="land-xhdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/port-xhdpi.png" gap:platform="android" gap:qualifier="port-xhdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/land-mdpi.png" gap:platform="android" gap:qualifier="land-ldpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<icon src="res/android/xhdpi.png" gap:platform="android" gap:qualifier="xhdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/land-hdpi.png" gap:platform="android" gap:qualifier="land-hdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/port-mdpi.png" gap:platform="android" gap:qualifier="port-ldpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<icon src="res/android/ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<icon src="res/android/hdpi.png" gap:platform="android" gap:qualifier="hdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<icon src="res/android/xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/port-hdpi.png" gap:platform="android" gap:qualifier="port-hdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/port-ldpi.png" gap:platform="android" gap:qualifier="port-ldpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<icon src="res/android/mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
+	<!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+	<gap:splash src="res/android/land-ldpi.png" gap:platform="android" gap:qualifier="land-ldpi"/>
 
-	<icon src="res/android/ldpi.png" gap:platform="android" gap:density="ldpi"/>
-	<icon src="res/android/xxhdpi.png" gap:platform="android" gap:density="xxhdpi"/>
-	<icon src="res/android/hdpi.png" gap:platform="android" gap:density="hdpi"/>
-	<icon src="res/android/xhdpi.png" gap:platform="android" gap:density="xhdpi"/>
-	<icon src="res/android/mdpi.png" gap:platform="android" gap:density="mdpi"/>
 
-	<gap:plugin name="cordova-plugin-file-transfer" source="npm" version="1.2.0" />
-	<gap:plugin name="cordova-sqlite-storage" source="npm" version="0.7.10" />
-
-	<!-- Enable Android debugging -->
-	<gap:config-file platform="android" parent="/manifest">
-		<application android:debuggable="true" />
-	</gap:config-file>
 </widget>
