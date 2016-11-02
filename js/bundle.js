@@ -47,6 +47,11 @@
 	"use strict";
 
 	var BPromise = __webpack_require__(1);
+	var TokenStore = __webpack_require__(4);
+	var secureStore = __webpack_require__(5);
+	var localStore = __webpack_require__(6);
+	var pin = __webpack_require__(7);
+	var pinView = __webpack_require__(9);
 
 	var defaultConfig = {
 	        files: {
@@ -64,6 +69,8 @@
 	var cacheDirectory;     // throwaway data, like resources.zip
 	var resourcesDirectory; // static resources private to app
 	var documentDirectory;  // downloaded documents
+
+	var clickType = typeof document.ontouchstart === "undefined" ? "click" : "touchstart";
 
 	function UserVisibleError(message) {
 	    this.message = message;
@@ -140,16 +147,38 @@
 	    }, interval);
 	}
 
-	function _startup(config, url, appUrl, enableOffline) {
+	function createTokenStore(requirePin){
+
+	    var tokenStore = new TokenStore(requirePin ? secureStore : localStore);
+
+	    return {
+	        set: function(token, callback) {
+	            tokenStore.set(token).then(callback, callback);
+	        },
+	        get: function(callback) {
+	            tokenStore.get().then(function(token) {
+	                if (callback) callback(token);
+	            }, function(e) {
+	                if (callback) callback(undefined);
+	            });
+	        },
+	        remove: function(callback) {
+	            tokenStore.remove().then(callback, callback);
+	        }
+	    }
+	}
+
+	function _startup(config, url, appUrl, enableOffline, requirePin) {
 	    return new BPromise(function(resolve, reject) {
 	        window.dojoConfig = {
 	            appbase: url,
 	            remotebase: appUrl,
 	            baseUrl: url + "mxclientsystem/dojo/",
+	            async: true,
 	            cacheBust: config.cachebust,
 	            offline: enableOffline,
 	            server: {
-	                timeout: 30000
+	                timeout: 5000
 	            },
 	            data: {
 	                offlineBackend: {
@@ -177,21 +206,109 @@
 	                createStoreFn: function() {
 	                    return window.sqlitePlugin.openDatabase({ name: "MendixDatabase.db", location: 2 });
 	                }
+	            },
+	            session: {
+	                shouldGenerateToken: true,
+	                tokenStore: createTokenStore(requirePin)
+	            },
+	            ui: {
+	                customLoginFn: function(messageCode) {
+	                    var loginNode = document.getElementById("mx-login-container");
+	                    var loginButton = document.getElementById("mx-execute-login");
+	                    var errorNode = document.getElementById("mx-login-error");
+
+	                    if (window.mx.isLoaded()) {
+	                        var contentNode = document.getElementById("content");
+	                        contentNode.style.display = "none";
+	                    }
+
+	                    loginNode.style.display = "flex";
+	                    loginButton.addEventListener(clickType, loginAction);
+
+	                    function loginAction() {
+	                        var loginUsername = document.getElementById("mx-username");
+	                        var loginPassword = document.getElementById("mx-password");
+
+	                        mx.login(loginUsername.value, loginPassword.value, function() {
+	                            loginNode.style.display = "";
+	                            loginButton.removeEventListener(clickType, loginAction);
+	                        }, function(e) {
+	                            errorNode.textContent = "We couldn't log you in";
+	                        });
+	                    }
+	                }
+	            },
+	            afterLoginFn: function() {
+	                /*
+	                 * If defined, this function is invoked after sucessful login,
+	                 * instead of `startup` call. As below, the example can be a PIN
+	                 * setting page.
+	                 */
+
+	                if (requirePin) {
+	                    var configureAndConfirm = function(message) {
+	                        pinView.configure(message, function(enteredPin) {
+	                            pinView.confirm(enteredPin, startClient, function() {
+	                                configureAndConfirm("PIN did not match. Try again!");
+	                            });
+	                        });
+	                    };
+
+	                    configureAndConfirm("Set up a PIN");
+	                } else {
+	                    startClient();
+	                }
+
+	                function startClient() {
+	                    window.mx.isLoaded() ? window.mx.reload() : window.mx.startup();
+	                }
+	            },
+	            afterNavigationFn: function() {
+	                /*
+	                 * If defined, this function is invoked in onNavigation method,
+	                 * called as the last action during the startup. Lines below handle
+	                 * removal of the loading nodes.
+	                 */
+	                removeSelf();
 	            }
 	        };
 
 	        if (cordova.platformId === "android") {
-	            window.dojoConfig.ui = {
-	                openUrlFn: function(url, fileName, windowName) {
-	                    download(url, cordova.file.externalCacheDirectory + fileName, false, {}, null)
-	                        .then(function(fe) {
-	                            cordova.InAppBrowser.open(fe.toURL(), "_system");
-	                        })
-	                        .catch(function(e) {
-	                            window.mx.ui.exception("Could not download file");
-	                        });
-	                }
+	            window.dojoConfig.ui.openUrlFn = function(url, fileName, windowName) {
+	                download(url, cordova.file.externalCacheDirectory + fileName, false, {}, null)
+	                    .then(function(fe) {
+	                        cordova.InAppBrowser.open(fe.toURL(), "_system");
+	                    })
+	                    .catch(function(e) {
+	                        window.mx.ui.exception("Could not download file");
+	                    });
 	            };
+	        }
+
+	        // When running on webkit we need to inline dynamic images
+	        // because the session cookie is unavailable for wkwebview 
+	        // and only available in native code.
+	        if (window.cordova.wkwebview) {
+	            var sequence = 0;
+	            window.dojoConfig.data.onlineBackend = {
+	                getImgUriFn: function(url, callback, error) {
+	                    var fileTransfer = new FileTransfer();
+	                    var tmpFile = cordova.file.tempDirectory  + "img" + (+ new Date()) + "-" + sequence++;
+
+	                    fileTransfer.download(url, tmpFile, function(fileEntry) {
+	                      fileEntry.file(function(file) {
+	                          var reader = new FileReader();
+	                          reader.onload = function (evt) {
+	                              var obj = evt.target.result;
+	                              callback(obj);
+	                          };
+	                          reader.onerror = error;
+
+	                          reader.readAsDataURL(file);
+	                      }, error);
+	                    }, error);
+	                }
+	            }
 	        }
 
 	        // Because loading all app scripts takes quite a while we do that first and defer removing our
@@ -201,7 +318,9 @@
 	        pollUntil(200, 20, function() {
 	            return typeof mx !== "undefined";
 	        }, function() {
-	            removeSelf();
+	            if (!isAfterNavigationFnSupported()) {
+	                removeSelf();
+	            }
 	            addStylesheets(url, config.cachebust, config.files.css);
 	            replaceEventHandler("backbutton", handleBackButton, handleBackButtonForApp);
 	            resolve();
@@ -213,13 +332,28 @@
 	var startupMessage = window.sessionStorage.getItem("refreshData") ? "Synchronizing..." : "Starting app...";
 	var startup = withProgressMessage(_startup, startupMessage);
 
+	function isAbsolute(url) {
+	    // http://stackoverflow.com/a/19709846
+	    return /^(?:[a-z]+:)?\/\//i.test(url);
+	}
+
+	function isAfterNavigationFnSupported() {
+	    // The afterNavigationFn is supported on mx.version 6.9 and above
+	    // Versions below 6.8 do not support mx.version api
+	    return mx.version && !mx.version.startsWith("6.8");
+	}
 
 	function addScripts(url, cachebust, scripts) {
 	    var head = document.getElementsByTagName("head")[0];
 
 	    scripts.forEach(function(href) {
 	        var script = document.createElement("script");
-	        script.src = url + href + "?" + cachebust;
+
+	        if (isAbsolute(href)) {
+	            script.src = href;
+	        } else {
+	            script.src = url + href + "?" + cachebust;
+	        }
 
 	        head.appendChild(script);
 	    });
@@ -231,7 +365,12 @@
 	    stylesheets.forEach(function(href) {
 	        var link = document.createElement("link");
 	        link.rel = "stylesheet";
-	        link.href = url + href + "?" + cachebust;
+
+	        if (isAbsolute(href)) {
+	            link.href = href;
+	        } else {
+	            link.href = url + href + "?" + cachebust;
+	        }
 
 	        head.appendChild(link);
 	    });
@@ -239,10 +378,10 @@
 
 	function removeSelf() {
 	    var appNode = document.getElementById("mx-app");
-	    appNode.parentNode.removeChild(appNode);
+	    if (appNode) appNode.parentNode.removeChild(appNode);
 
 	    var styleNode = document.querySelector("link[href='css/index.css']");
-	    styleNode.parentNode.removeChild(styleNode);
+	    if (styleNode) styleNode.parentNode.removeChild(styleNode);
 	}
 
 	function hideLoader() {
@@ -432,12 +571,12 @@
 	}
 
 	function setupDirectoryLocations() {
-	    if (cordova.file) {
+	    if (cordova.wkwebview) {
+	        cacheDirectory = cordova.wkwebview.storageDir;
+	        documentDirectory = cordova.wkwebview.storageDir;
+	    } else if (cordova.file) {
 	        cacheDirectory = cordova.file.dataDirectory;
 	        documentDirectory = cordova.file.externalDataDirectory || cordova.file.dataDirectory;
-	    } else if (cordova.platformId === "windowsphone") {
-	        cacheDirectory = "mx-appdata:///local/";
-	        documentDirectory = null; // not supported on Windows Phone
 	    } else {
 	        throw new Error("Failed to setup directory locations: unsupported platform");
 	    }
@@ -459,8 +598,13 @@
 	        window.history.back();
 	    } else if (window.mx.ui.canMoveBack()) {
 	        window.history.back();
+	    } else if (window.mx.session.destroySession) {
+	        window.mx.session.destroySession(function() {
+	            navigator.app.exitApp();
+	        });
 	    } else {
-	        mx.session.logout(function() {
+	        // For legacy Mendix versions
+	        window.mx.session.logout(function() {
 	            navigator.app.exitApp();
 	        });
 	    }
@@ -471,31 +615,63 @@
 	    if (newHandler) document.addEventListener(eventType, newHandler);
 	}
 
+	function replaceWindowOpenFn() {
+	    // The client calls mail, call en text links with the window name set
+	    // to `_self`. This causes a new browser to be opened with the error
+	    // `UNSUPPORTED_URL_SCHEME`. To circumvent this we are overriding the window.open
+	    // so the window is set to `_system` which properly handles these schemes.
+	    window.open = function(strUrl, strWindowName, strWindowFeatures, callbacks) {
+	        if (/^(mailto:|sms:|tel:)/.test(strUrl)) {
+	            return cordova.InAppBrowser.open(strUrl, "_system", strWindowFeatures, callbacks)
+	        } else {
+	            return cordova.InAppBrowser.open(strUrl, strWindowName, strWindowFeatures, callbacks);
+	        }
+	    };
+	}
+
 	window.mxapp = {
-	    initialize: function(url, enableOffline) {
+	    initialize: function(url, enableOffline, requirePin) {
+
 	        try {
 	            enableOffline = !!enableOffline;
 
 	            // Make sure the url always ends with a /
 	            appUrl = url.replace(/\/?$/, "/");
 
+	            replaceWindowOpenFn();
+
 	            document.addEventListener("backbutton", handleBackButton);
 
 	            setupDirectoryLocations();
 
 	            var shouldDownloadFn = function(config) {
-	                return cordova.platformId !== "windowsphone" &&
-	                    (config.downloadResources || enableOffline);
+	                return config.downloadResources || enableOffline;
 	            };
 
-	            synchronizeResources(appUrl, shouldDownloadFn)
-	                .spread(function(config, resourcesUrl) {
-	                    return startup(config, resourcesUrl, appUrl, enableOffline);
-	                })
-	                .catch(handleError);
+	            if (requirePin) {
+	                var tokenStore = new TokenStore(secureStore);
+
+	                BPromise.all([ tokenStore.get(), pin.get() ]).spread(function(token, storedPin) {
+	                    if (token && storedPin) {
+	                        pinView.verify(syncAndStartup);
+	                    } else {
+	                        BPromise.all([ tokenStore.remove(), pin.remove() ]).then(syncAndStartup);
+	                    }
+	                });
+	            } else {
+	                syncAndStartup();
+	            }
 	        } catch (e) {
 	            handleError(e);
 	            return;
+	        }
+
+	        function syncAndStartup() {
+	            synchronizeResources(appUrl, shouldDownloadFn)
+	                .spread(function(config, resourcesUrl) {
+	                    return startup(config, resourcesUrl, appUrl, enableOffline, requirePin);
+	                })
+	                .catch(handleError);
 	        }
 
 	        function handleError(e) {
@@ -512,19 +688,19 @@
 
 	/* WEBPACK VAR INJECTION */(function(process, global, setImmediate) {/* @preserve
 	 * The MIT License (MIT)
-	 *
+	 * 
 	 * Copyright (c) 2013-2015 Petka Antonov
-	 *
+	 * 
 	 * Permission is hereby granted, free of charge, to any person obtaining a copy
 	 * of this software and associated documentation files (the "Software"), to deal
 	 * in the Software without restriction, including without limitation the rights
 	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 	 * copies of the Software, and to permit persons to whom the Software is
 	 * furnished to do so, subject to the following conditions:
-	 *
+	 * 
 	 * The above copyright notice and this permission notice shall be included in
 	 * all copies or substantial portions of the Software.
-	 *
+	 * 
 	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
@@ -532,10 +708,10 @@
 	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	 * THE SOFTWARE.
-	 *
+	 * 
 	 */
 	/**
-	 * bluebird build version 2.10.2
+	 * bluebird build version 2.11.0
 	 * Features enabled: core, race, call_get, generators, map, nodeify, promisify, props, reduce, settle, some, cancel, using, filter, any, each, timers
 	*/
 	!function(e){if(true)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Promise=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -2753,6 +2929,7 @@
 	var nodebackForPromise = PromiseResolver._nodebackForPromise;
 	var errorObj = util.errorObj;
 	var tryCatch = util.tryCatch;
+
 	function Promise(resolver) {
 	    if (typeof resolver !== "function") {
 	        throw new TypeError("the promise constructor requires a resolver function\u000a\u000a    See http://goo.gl/EC22Yn\u000a");
@@ -2855,6 +3032,8 @@
 	Promise.prototype.error = function (fn) {
 	    return this.caught(util.originatesFromRejection, fn);
 	};
+
+	Promise.getNewLibraryCopy = module.exports;
 
 	Promise.is = function (val) {
 	    return val instanceof Promise;
@@ -3398,6 +3577,7 @@
 	    }
 	};
 
+
 	util.notEnumerableProp(Promise,
 	                       "_makeSelfResolutionError",
 	                       makeSelfResolutionError);
@@ -3409,6 +3589,7 @@
 	_dereq_("./direct_resolve.js")(Promise);
 	_dereq_("./synchronous_inspection.js")(Promise);
 	_dereq_("./join.js")(Promise, PromiseArray, tryConvertToPromise, INTERNAL);
+	Promise.version = "2.11.0";
 	Promise.Promise = Promise;
 	_dereq_('./map.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL);
 	_dereq_('./cancel.js')(Promise);
@@ -3426,30 +3607,30 @@
 	_dereq_('./each.js')(Promise, INTERNAL);
 	_dereq_('./timers.js')(Promise, INTERNAL);
 	_dereq_('./filter.js')(Promise, INTERNAL);
-
-	    util.toFastProperties(Promise);
-	    util.toFastProperties(Promise.prototype);
-	    function fillTypes(value) {
-	        var p = new Promise(INTERNAL);
-	        p._fulfillmentHandler0 = value;
-	        p._rejectionHandler0 = value;
-	        p._progressHandler0 = value;
-	        p._promise0 = value;
-	        p._receiver0 = value;
-	        p._settledValue = value;
-	    }
-	    // Complete slack tracking, opt out of field-type tracking and
-	    // stabilize map
-	    fillTypes({a: 1});
-	    fillTypes({b: 2});
-	    fillTypes({c: 3});
-	    fillTypes(1);
-	    fillTypes(function(){});
-	    fillTypes(undefined);
-	    fillTypes(false);
-	    fillTypes(new Promise(INTERNAL));
-	    CapturedTrace.setBounds(async.firstLineError, util.lastLineError);
-	    return Promise;
+	                                                         
+	    util.toFastProperties(Promise);                                          
+	    util.toFastProperties(Promise.prototype);                                
+	    function fillTypes(value) {                                              
+	        var p = new Promise(INTERNAL);                                       
+	        p._fulfillmentHandler0 = value;                                      
+	        p._rejectionHandler0 = value;                                        
+	        p._progressHandler0 = value;                                         
+	        p._promise0 = value;                                                 
+	        p._receiver0 = value;                                                
+	        p._settledValue = value;                                             
+	    }                                                                        
+	    // Complete slack tracking, opt out of field-type tracking and           
+	    // stabilize map                                                         
+	    fillTypes({a: 1});                                                       
+	    fillTypes({b: 2});                                                       
+	    fillTypes({c: 3});                                                       
+	    fillTypes(1);                                                            
+	    fillTypes(function(){});                                                 
+	    fillTypes(undefined);                                                    
+	    fillTypes(false);                                                        
+	    fillTypes(new Promise(INTERNAL));                                        
+	    CapturedTrace.setBounds(async.firstLineError, util.lastLineError);       
+	    return Promise;                                                          
 
 	};
 
@@ -4799,7 +4980,7 @@
 
 	var afterTimeout = function (promise, message) {
 	    if (!promise.isPending()) return;
-
+	    
 	    var err;
 	    if(!util.isPrimitive(message) && (message instanceof Error)) {
 	        err = message;
@@ -5404,7 +5585,6 @@
 /***/ function(module, exports) {
 
 	// shim for using process in browser
-
 	var process = module.exports = {};
 
 	// cached from whatever global is present so that test runners that stub it
@@ -5415,22 +5595,84 @@
 	var cachedSetTimeout;
 	var cachedClearTimeout;
 
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
 	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
 	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
 	    }
-	  }
 	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
+	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -5455,7 +5697,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout(cleanUpNextTick);
+	    var timeout = runTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -5472,7 +5714,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout(timeout);
+	    runClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -5484,7 +5726,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout(drainQueue, 0);
+	        runTimeout(drainQueue);
 	    }
 	};
 
@@ -5605,6 +5847,487 @@
 	  delete immediateIds[id];
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).setImmediate, __webpack_require__(3).clearImmediate))
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var BPromise = __webpack_require__(1);
+
+	var tokenKey = "mx-authtoken";
+
+	function TokenStore(store) {
+	    this._store = store;
+	}
+
+	TokenStore.prototype.set = function(tokenValue) {
+	    return getNamespace().then(function(storageNamespace) {
+	        return this._store.set(storageNamespace, tokenKey, tokenValue);
+	    }.bind(this));
+	};
+
+	TokenStore.prototype.get = function() {
+	    return getNamespace().then(function(storageNamespace) {
+	        return this._store.get(storageNamespace, tokenKey).caught(function() {
+	            return BPromise.resolve(undefined);
+	        });
+	    }.bind(this));
+	};
+
+	TokenStore.prototype.remove = function() {
+	    return getNamespace().then(function(storageNamespace) {
+	        return this._store.remove(storageNamespace, tokenKey).caught(function() {
+	            return BPromise.resolve();
+	        });
+	    }.bind(this));
+	};
+
+
+	function getNamespace() {
+	    return new BPromise(function(resolve, reject) {
+	        return cordova.getAppVersion.getPackageName(resolve);
+	    });
+	}
+
+	module.exports = TokenStore;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var BPromise = __webpack_require__(1);
+	var namespacePromises = {};
+
+	module.exports = {
+	    set: set,
+	    get: get,
+	    remove: remove
+	};
+
+	function getStorage(namespace) {
+	    if (!namespacePromises[namespace]) {
+	        namespacePromises[namespace] = new BPromise(function(resolve, reject) {
+	            var storage = new cordova.plugins.SecureStorage(function() {
+	                resolve(storage);
+	            }, reject, namespace);
+	        });
+	    }
+
+	    return namespacePromises[namespace];
+	}
+
+	function remove(namespace, key) {
+	    return getStorage(namespace).then(function(storage) {
+	        return new BPromise(function(resolve, reject) {
+	            storage.remove(resolve, reject, key);
+	        });
+	    });
+	}
+
+	function set(namespace, key, value) {
+	    return getStorage(namespace).then(function(storage) {
+	        return new BPromise(function(resolve, reject) {
+	            storage.set(resolve, reject, key, value);
+	        });
+	    });
+	}
+
+	function get(namespace, key) {
+	    return getStorage(namespace).then(function(storage) {
+	        return new BPromise(function(resolve, reject) {
+	            storage.get(resolve, reject, key);
+	        });
+	    });
+	}
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var BPromise = __webpack_require__(1);
+
+	module.exports = {
+	    set: set,
+	    get: get,
+	    remove: remove
+	};
+
+	function remove(namespace, key) {
+	    return window.localStorage.removeItem(key)
+	}
+
+	function set(namespace, key, value) {
+	    return window.localStorage.setItem(key, value);
+	}
+
+	function get(namespace, key) {
+	    return BPromise.resolve(window.localStorage.getItem(key));
+	}
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var BPromise = __webpack_require__(1);
+	var secureStore = __webpack_require__(5);
+	var namespace = __webpack_require__(8);
+
+	var pinKey = "pin";
+
+	module.exports = {
+	    set: setPin,
+	    get: getPin,
+	    remove: removePin,
+	    getAttemptsLeft: getAttemptsLeft,
+	    verify: verify,
+	    isValid: isValid
+	};
+
+	function removePin() {
+	    return namespace.get().then(function(storageNamespace) {
+	        return BPromise.all([
+	            secureStore.remove(storageNamespace, pinKey),
+	            clearAttemptsLeft()
+	        ]).caught(function() {
+	            return BPromise.resolve();
+	        });
+	    });
+	}
+
+	function setPin(pinValue) {
+	    return namespace.get().then(function(storageNamespace) {
+	        return secureStore.set(storageNamespace, pinKey, pinValue).caught(function() {
+	            return BPromise.resolve();
+	        });
+	    });
+	}
+
+	function getPin() {
+	    return namespace.get().then(function(storageNamespace) {
+	        return secureStore.get(storageNamespace, pinKey).caught(function() {
+	            return BPromise.resolve(undefined);
+	        });
+	    });
+	}
+
+	function getAttemptsLeft() {
+	    return namespace.get().then(function(storageNamespace) {
+	        return secureStore.get(storageNamespace, "mx-pin-attempts-left").then(function(strAttemptsLeft) {
+	            return Number(strAttemptsLeft);
+	        });
+	    }).caught(function() {
+	        return BPromise.resolve(3);
+	    });
+	}
+
+	function setAttemptsLeft(attempts) {
+	    return namespace.get().then(function(storageNamespace) {
+	        return secureStore.set(storageNamespace, "mx-pin-attempts-left", attempts.toString());
+	    });
+	}
+
+	function clearAttemptsLeft() {
+	    return namespace.get().then(function(storageNamespace) {
+	        return secureStore.remove(storageNamespace, "mx-pin-attempts-left").caught(function() {
+	            return BPromise.resolve();
+	        });
+	    });
+	}
+
+	function verify(enteredPin) {
+	    return getPin().then(function(storedPin) {
+	        if (enteredPin === storedPin) {
+	            return clearAttemptsLeft();
+	        } else {
+	            return getAttemptsLeft().then(function(attemptsLeft) {
+	                return setAttemptsLeft(--attemptsLeft).then(function() {
+	                   return BPromise.reject(new Error("Invalid PIN"));
+	                });
+	            });
+	        }
+	    });
+	}
+
+	function isValid(pin) {
+	    return /^[0-9]{5}$/.test(pin);
+	}
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var BPromise = __webpack_require__(1);
+
+	module.exports = {
+	    get: getNamespace
+	};
+
+	function getNamespace() {
+	    return new BPromise(function(resolve, reject) {
+	        return cordova.getAppVersion.getPackageName(resolve);
+	    });
+	}
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var BPromise = __webpack_require__(1);
+	var pin = __webpack_require__(7);
+	var secureStore = __webpack_require__(5);
+	var TokenStore = __webpack_require__(4);
+
+	var tokenStore = new TokenStore(secureStore);
+
+	var clickType = typeof document.ontouchstart === "undefined" ? "click" : "touchstart";
+	var changeKeyboardToPassword;
+
+	var pinNode = document.getElementById("mx-pin-container");
+	var errorNode = document.getElementById("mx-pin-error");
+	var confirmPinButton = document.getElementById("mx-confirm-pin");
+	var forgotPinButton = document.getElementById("mx-forgot-pin");
+	var userInput = document.querySelectorAll("#mx-pin-container input");
+
+	module.exports = {
+	    verify: function(callback) {
+	        updateErrorText("Verify your PIN");
+
+	        addMoveInputListeners(pinNode);
+	        cleanUserInput();
+
+	        confirmPinButton.addEventListener(clickType, verifyPinAction);
+	        forgotPinButton.addEventListener(clickType, forgetPinAction);
+
+	        forgotPinButton.style.display = "";
+	        pinNode.style.display = "flex";
+
+	        function verifyPinAction() {
+	            pin.verify(getEnteredPin()).then(closeView, function() {
+	                pin.getAttemptsLeft().then(function(attemptsLeft) {
+	                    if (attemptsLeft === 0) {
+	                        forgetPinAction().then(closeView);
+	                    } else {
+	                        updateErrorText("Invalid PIN");
+	                        cleanUserInput();
+	                    }
+	                });
+	            });
+	        }
+
+	        function forgetPinAction() {
+	            BPromise.all([
+	                tokenStore.remove(),
+	                pin.remove()
+	            ]).then(closeView);
+	        }
+
+	        function closeView() {
+	            removeMoveInputListeners(pinNode);
+	            confirmPinButton.removeEventListener(clickType, verifyPinAction);
+	            forgotPinButton.removeEventListener(clickType, forgetPinAction);
+
+	            pinNode.style.display = "";
+
+	            if (callback) callback();
+	        }
+	    },
+
+	    configure: function(message, callback) {
+	        updateErrorText(message);
+	        addMoveInputListeners(pinNode);
+
+	        cleanUserInput();
+
+	        forgotPinButton.style.display = "none";
+	        pinNode.style.display = "flex";
+
+	        confirmPinButton.addEventListener(clickType, validatePin);
+
+	        function validatePin() {
+	            var userPin = getEnteredPin();
+
+	            if (pin.isValid(userPin)) {
+	                confirmPinButton.removeEventListener(clickType, validatePin);
+	                removeMoveInputListeners(pinNode);
+
+	                pinNode.style.display = "";
+
+	                if (callback) callback(userPin);
+	            } else {
+	                errorNode.textContent = "The PIN you have submitted is invalid";
+	            }
+	        }
+	    },
+
+	    confirm: function(pinToConfirm, callback, error) {
+	        errorNode.textContent = "Confirm your PIN";
+	        addMoveInputListeners(pinNode);
+
+	        cleanUserInput();
+
+	        forgotPinButton.style.display = "none";
+	        pinNode.style.display = "flex";
+
+	        confirmPinButton.addEventListener(clickType, validateAndStorePin);
+
+	        function removeSelf() {
+	            confirmPinButton.removeEventListener(clickType, validateAndStorePin);
+	            removeMoveInputListeners(pinNode);
+
+	            pinNode.style.display = "";
+	        }
+
+	        function validateAndStorePin() {
+	            var userPin = getEnteredPin();
+
+	            if (userPin === pinToConfirm) {
+	                pin.set(userPin).then(function() {
+	                    removeSelf();
+
+	                    if (callback) callback();
+	                });
+	            } else {
+	                removeSelf();
+
+	                if (error) error(new Error("PIN did not match"));
+	            }
+	        }
+	    }
+	};
+
+	function getEnteredPin() {
+	    var enteredPin = [].slice.call(userInput).map(function (element) {
+	        return element.value;
+	    }).join("");
+	    return enteredPin;
+	}
+
+	function updateErrorText(message) {
+	    pin.getAttemptsLeft().then(function(attemptsLeft) {
+	        errorNode.textContent = message;
+	        if (attemptsLeft === 1) {
+	            errorNode.textContent += ". You have one more attempt";
+	        }
+	    });
+	}
+
+	function moveInputForward(e) {
+	    var target = e.target;
+
+	    if (!/^[0-9]{1}/.test(target.value)) {
+	        target.value = "";
+	    }
+
+	    if (target.value.length >= 1) {
+	        target.value = target.value[0];
+	        // We would like to have visual feedback of the typed number
+	        // rather than changing to star immediately
+	        changeKeyboardToPassword = setTimeout(function() {
+	            switchKeyboard(target, "password");
+	        }, 500);
+	        var next = target;
+	        while (next = next.nextElementSibling) {
+	            if (next.tagName.toLowerCase() === "input") {
+	                switchKeyboard(next, "number");
+	                next.focus();
+	                break;
+	            }
+	        }
+
+	        if (next == null) {
+	            target.blur();
+	        }
+	    }
+	}
+
+	function moveInputBackwards(target) {
+	    var prev = target;
+	    while (prev = prev.previousElementSibling) {
+	        if (target.nextElementSibling == null && target.value !== "") {
+	            switchKeyboard(target, "password");
+	            break;
+	        }
+	        if (prev.tagName.toLowerCase() === "input") {
+	            switchKeyboard(prev, "number");
+	            prev.focus();
+	            break;
+	        }
+	    }
+	}
+
+	function onKeyDownAction(e) {
+	    var target = e.target;
+	    if (e.which === 8) {
+	        // Clean timeout as per scenario when a user presses key and backbutton fast
+	        clearTimeout(changeKeyboardToPassword);
+	        moveInputBackwards(target);
+	    } else {
+	        var prev = target.previousElementSibling;
+	        if (prev) switchKeyboard(prev, "password");
+	    }
+	}
+
+	function switchKeyboard(target, type) {
+	    // As we want to have the best of both worlds: password protected input and
+	    // numeric keyboard; we dynamically switch the type of input field. This
+	    // hack allows us to have instant protection of the fields, while the
+	    // text-security works with a noticeable delay
+	    target.setAttribute("type", type);
+	}
+
+	function switchToNumericKeyboard(e) {
+	    e.target.value = "";
+	    switchKeyboard(e.target, "number");
+	}
+
+	function cleanUserInput() {
+	    [].slice.call(userInput).forEach(function(element) {
+	        element.value = "";
+	    });
+	}
+
+	function clearInput(e) {
+	    e.target.value = "";
+	}
+
+	function preventDefaultAction(e) {
+	    e.preventDefault();
+	}
+
+	function addMoveInputListeners(containerNode) {
+	    containerNode.addEventListener("keyup", moveInputForward);
+	    containerNode.addEventListener("keydown", onKeyDownAction);
+	    containerNode.addEventListener("paste", preventDefaultAction);
+	    containerNode.addEventListener("touchstart", switchToNumericKeyboard);
+	    // Because focus events don't bubble we need to add an event listener
+	    // for the capturing phase.
+	    containerNode.addEventListener("focus", clearInput, true);
+	}
+
+	function removeMoveInputListeners(containerNode) {
+	    containerNode.removeEventListener("keyup", moveInputForward);
+	    containerNode.removeEventListener("keydown", onKeyDownAction);
+	    containerNode.removeEventListener("paste", preventDefaultAction);
+	    containerNode.removeEventListener("touchstart", switchToNumericKeyboard);
+	    containerNode.removeEventListener("focus", clearInput, true);
+	}
+
 
 /***/ }
 /******/ ]);
