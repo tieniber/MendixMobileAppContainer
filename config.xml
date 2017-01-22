@@ -81,7 +81,7 @@
 	<gap:plugin name="phonegap-plugin-push" source="npm" version="1.5.3" />
 
 	<gap:plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
-	<gap:plugin name="cordova-plugin-spinnerdialog" source="npm" />
+	<gap:plugin name="cordova-plugin-spinner" source="npm" />
 	<gap:plugin name="cordova-plugin-touch-id" source="npm"/>
 	<gap:plugin name="cordova-plugin-pin-dialog-et" source="npm"/>
 	<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
