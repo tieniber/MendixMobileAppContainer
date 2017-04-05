@@ -67,13 +67,13 @@
         <script src="cordova.js"></script>
         <script src="js/bundle.js"></script>
         <script>
-            var enableOffline = false;
+            var enableOffline = true;
 
             var requirePin = false;
 
             // Make sure to include the scheme (e.g. http://) in the URL.
             document.addEventListener("deviceready", function() {
-                mxapp.initialize("http://172.20.10.2:8080", enableOffline, requirePin);
+                mxapp.initialize("http://192.168.1.1:8080", enableOffline, requirePin);
             });
         </script>
 
