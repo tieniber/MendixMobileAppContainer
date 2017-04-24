@@ -86,6 +86,7 @@
 	<gap:plugin name="cordova-plugin-pin-dialog-et" source="npm"/>
 	<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
 
+	<gap:plugin name="cordova-plugin-taptic-engine" source="npm" />
 
 	<gap:platform name="ios" />
 
