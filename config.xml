@@ -15,7 +15,7 @@
 	Instead, Phonegap Build derives the platform versions from the CLI
 	defaults.
 	-->
-	<preference name="phonegap-version" value="cli-6.3.0" />
+	<preference name="phonegap-version" value="cli-6.5.0" />
 
 
 	<!--
@@ -46,6 +46,7 @@
 	The gradle build tool is required for the phonegap-plugin-push
 	-->
 	<preference name="android-build-tool" value="gradle" />
+	<preference name="xwalkMultipleApk" value="true" />
 
 	<!-- allow assets to be loaded and open links in the app itself, see: http://phonegap.com/blog/2012/03/20/access-tags/ -->
 	<!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
@@ -87,6 +88,8 @@
 	<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
 
 	<gap:plugin name="cordova-plugin-taptic-engine" source="npm" />
+	<gap:plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.1" source="git" />
+
 
 	<gap:platform name="ios" />
 
