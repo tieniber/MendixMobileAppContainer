@@ -306,7 +306,7 @@ button, input, select, textarea {
   }
 }
 #loading {
-  position: absolute;
+  position: relative;
   left: calc(50% - 100px);
   top: calc(50% - 100px);
 }
