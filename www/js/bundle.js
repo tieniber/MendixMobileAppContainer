@@ -1970,11 +1970,11 @@
                 else if (o = confirm("Do you want to use the default url: " + i.url + " ?")) {
 					if (confirm("Online mode?")) {i.enableOffline=false;}else{i.enableOffline=true;}
 					localStorage.setItem("mx-prior-url", i.url), r.initialize(i.url, i.hybridTabletProfile, i.hybridPhoneProfile, i.enableOffline, i.requirePin);
-				 }
-			} else {
-                t = prompt("Enter a new URL to initialize:");
-				if (confirm("Online mode?")) {i.enableOffline=false;}else{i.enableOffline=true;}
-                localStorage.setItem("mx-prior-url", t), r.initialize(t, i.hybridTabletProfile, i.hybridPhoneProfile, i.enableOffline, i.requirePin)
+				 } else {
+                	t = prompt("Enter a new URL to initialize:");
+					if (confirm("Online mode?")) {i.enableOffline=false;}else{i.enableOffline=true;}
+                	localStorage.setItem("mx-prior-url", t), r.initialize(t, i.hybridTabletProfile, i.hybridPhoneProfile, i.enableOffline, i.requirePin)
+				}
             } else {
                 var o = confirm("Do you want to use the default url: " + i.url + " ?");
                 if (o) {

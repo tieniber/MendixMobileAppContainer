@@ -72,7 +72,7 @@ body {
 .mx-loader .mx-message {
     text-align: center;
     padding: 4px 0;
-}/* Reset 
+}/* Reset
 /*******************/
 * {
     box-sizing: border-box;
@@ -121,7 +121,7 @@ button, input, select, textarea {
     }
 }
 
-/* Login 
+/* Login
 /*******************/
 
 .mx-hybridapp {
@@ -266,3 +266,79 @@ button, input, select, textarea {
     background: none;
 }
 /*# sourceMappingURL=bundle.css.map*/
+
+@keyframes svg-rotate {
+  to {
+	transform: rotate(360deg);
+  }
+}
+@keyframes stroke-width {
+  0%, 100% {
+	stroke-width: 0;
+  }
+  45%, 55% {
+	stroke-width: 2;
+  }
+  50% {
+	stroke-width: 4;
+  }
+}
+@keyframes stroke-dash {
+  0% {
+	stroke-dasharray: 0, 301.59289;
+	stroke-dashoffset: 0;
+  }
+  50% {
+	stroke-dasharray: 301.59289, 0;
+	stroke-dashoffset: 0;
+  }
+  100% {
+	stroke-dasharray: 301.59289, 301.59289;
+	stroke-dashoffset: -301.59289;
+  }
+}
+@keyframes stroke-color {
+  from {
+	stroke: #1880b9;
+  }
+  to {
+	stroke: white;
+  }
+}
+#loading {
+  position: absolute;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+}
+
+.m-modeler-loader {
+  position: relative;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.m-modeler-loader .m-modeler-loader-spinner .svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto auto;
+  display: block;
+  animation: svg-rotate 8000ms linear infinite;
+}
+
+/* IE 10 and above */
+_:-ms-lang(x), .m-modeler-loader .m-modeler-loader-spinner .svg {
+  animation: svg-rotate 2000ms linear infinite;
+}
+
+.m-modeler-loader .m-modeler-loader-spinner circle {
+  fill: transparent;
+  stroke: #1880b9;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 300, 100;
+  stroke-dashoffset: 50;
+  animation: stroke-dash 2000ms linear infinite, stroke-width 2000ms linear infinite, stroke-color 8000ms steps(4) infinite;
+}
