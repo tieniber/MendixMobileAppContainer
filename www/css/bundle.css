@@ -305,10 +305,10 @@ button, input, select, textarea {
 	stroke: white;
   }
 }
-#loading {
-  position: relative;
-  left: calc(50% - 100px);
-  top: calc(50% - 100px);
+#loading svg{
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .m-modeler-loader {
