@@ -3,5 +3,5 @@
   "hybridTabletProfile": "",
   "hybridPhoneProfile": "",
   "enableOffline": true,
-  "requirePin": false
+  "requirePin": true
 }
