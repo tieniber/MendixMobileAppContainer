@@ -3,5 +3,8 @@
   "hybridTabletProfile": "",
   "hybridPhoneProfile": "",
   "enableOffline": true,
-  "requirePin": true
+  "persistentSession": {
+	  "enabled":true,
+	  "forceSecurity":true
+	}
 }
