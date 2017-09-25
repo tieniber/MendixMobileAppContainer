@@ -2,7 +2,7 @@
   "url": "http://tieniber.ddns.net:8080/",
   "hybridTabletProfile": "",
   "hybridPhoneProfile": "",
-  "enableOffline": true,
+  "enableOffline": false,
   "persistentSession": {
 	  "enabled":true,
 	  "forceSecurity":true
