@@ -108,40 +108,6 @@
 
         <plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" spec="1.1.0" />
 
-        <platform name="ios">
-                <icon src="res/ios/icon-60-2x.png" width="120" height="120" />
-                <icon src="res/ios/icon-76-2x.png" width="152" height="152" />
-                <icon src="res/ios/icon-72-2x.png" width="144" height="144" />
-                <splash src="res/ios/screen-ipad-portrait.png" width="768" height="1024" />
-                <splash src="res/ios/screen-ipad-portrait-2x.png" width="1536" height="2048" />
-                <icon src="res/ios/icon-60-3x.png" width="180" height="180" />
-                <splash src="res/ios/screen-ipad-landscape.png" width="1024" height="768" />
-                <icon src="res/ios/icon-small-2x.png" width="58" height="58" />
-                <splash src="res/ios/screen-iphone-portrait-667h.png" width="750" height="1334" />
-                <icon src="res/ios/icon-72.png" width="72" height="72" />
-                <icon src="res/ios/icon-76.png" width="76" height="76" />
-                <icon src="res/ios/icon.png" width="57" height="57" />
-                <splash src="res/ios/screen-iphone-portrait-2x.png" width="640" height="960" />
-                <icon src="res/ios/icon-40-2x.png" width="80" height="80" />
-                <splash src="res/ios/screen-iphone-landscape-2x.png" width="960" height="640" />
-                <icon src="res/ios/icon-83.5-2x.png" width="167" height="167" />
-                <splash src="res/ios/screen-iphone-landscape-568h-2x.png" width="1136" height="640" />
-                <icon src="res/ios/icon-2x.png" width="114" height="114" />
-                <icon src="res/ios/icon-50.png" width="50" height="50" />
-                <splash src="res/ios/screen-iphone-landscape.png" width="480" height="320" />
-                <splash src="res/ios/screen-iphone-portrait-568h-2x.png" width="640" height="1136" />
-                <splash src="res/ios/screen-iphone-portrait-736h.png" width="1242" height="2208" />
-                <icon src="res/ios/icon-50-2x.png" width="100" height="100" />
-                <icon src="res/ios/icon-40.png" width="40" height="40" />
-                <splash src="res/ios/screen-ipad-landscape-2x.png" width="2048" height="1536" />
-                <splash src="res/ios/screen-iphone-portrait.png" width="320" height="480" />
-                <splash src="res/ios/screen-iphone-landscape-667h.png" width="1334" height="750" />
-                <splash src="res/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
-                <icon src="res/ios/icon-small.png" width="29" height="29" />
-                <icon src="res/ios/icon-60.png" width="60" height="60" />
-                <icon src="res/ios/icon-small-3x.png" width="87" height="87" />
-        </platform>
-
         <!-- The gradle build tool is required for the phonegap-plugin-push -->
         <preference name="android-build-tool" value="gradle" />
 
@@ -152,44 +118,54 @@
         <plugin name="cordova-plugin-crosswalk-webview" source="npm" spec="2.3.0" />
         <plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.2" />
 
-        <platform name="android">
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <icon src="res/android/icon-192-xxxhdpi.png" qualifier="xxxhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-ldpi-portrait.png" qualifier="port-ldpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-mdpi-portrait.png" qualifier="port-mdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <icon src="res/android/icon-144-xxhdpi.png" qualifier="xxhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-hdpi-landscape.png" qualifier="land-hdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-mdpi-landscape.png" qualifier="land-mdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-xhdpi-portrait.png" qualifier="port-xhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-hdpi-portrait.png" qualifier="port-hdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <icon src="res/android/icon-48-mdpi.png" qualifier="mdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-ldpi-landscape.png" qualifier="land-ldpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-xxhdpi-landscape.png" qualifier="land-xxhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-xxhdpi-portrait.png" qualifier="port-xxhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <icon src="res/android/icon-72-hdpi.png" qualifier="hdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-xxxhdpi-landscape.png" qualifier="land-xxxhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <icon src="res/android/icon-96-xhdpi.png" qualifier="xhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <icon src="res/android/icon-36-ldpi.png" qualifier="ldpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-xxxhdpi-portrait.png" qualifier="port-xxxhdpi"/>
-                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
-                <splash src="res/android/screen-xhdpi-landscape.png" qualifier="land-xhdpi"/>
-        </platform>
+		<platform name="android">
+		<icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
+		<icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
+		<icon density="hdpi" src="res/icons/android/drawable-hdpi-icon.png" />
+		<icon density="xhdpi" src="res/icons/android/drawable-xhdpi-icon.png" />
+		<icon density="xxhdpi" src="res/icons/android/drawable-xxhdpi-icon.png" />
+		<icon density="xxxhdpi" src="res/icons/android/drawable-xxxhdpi-icon.png" />
+		<splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
+		<splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />
+		<splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi-screen.png" />
+		<splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi-screen.png" />
+		<splash density="land-xxhdpi" src="res/screens/android/drawable-land-xxhdpi-screen.png" />
+		<splash density="land-xxxhdpi" src="res/screens/android/drawable-land-xxxhdpi-screen.png" />
+		<splash density="port-ldpi" src="res/screens/android/drawable-port-ldpi-screen.png" />
+		<splash density="port-mdpi" src="res/screens/android/drawable-port-mdpi-screen.png" />
+		<splash density="port-hdpi" src="res/screens/android/drawable-port-hdpi-screen.png" />
+		<splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
+		<splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
+		<splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
+	</platform>
+	<platform name="ios">
+		<icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
+		<icon height="114" platform="ios" src="res/icons/ios/icon@2x.png" width="114" />
+		<icon height="40" platform="ios" src="res/icons/ios/icon-40.png" width="40" />
+		<icon height="80" platform="ios" src="res/icons/ios/icon-40@2x.png" width="80" />
+		<icon height="50" platform="ios" src="res/icons/ios/icon-50.png" width="50" />
+		<icon height="100" platform="ios" src="res/icons/ios/icon-50@2x.png" width="100" />
+		<icon height="60" platform="ios" src="res/icons/ios/icon-60.png" width="60" />
+		<icon height="120" platform="ios" src="res/icons/ios/icon-60@2x.png" width="120" />
+		<icon height="180" platform="ios" src="res/icons/ios/icon-60@3x.png" width="180" />
+		<icon height="72" platform="ios" src="res/icons/ios/icon-72.png" width="72" />
+		<icon height="144" platform="ios" src="res/icons/ios/icon-72@2x.png" width="144" />
+		<icon height="76" platform="ios" src="res/icons/ios/icon-76.png" width="76" />
+		<icon height="152" platform="ios" src="res/icons/ios/icon-76@2x.png" width="152" />
+		<icon height="29" platform="ios" src="res/icons/ios/icon-small.png" width="29" />
+		<icon height="58" platform="ios" src="res/icons/ios/icon-small@2x.png" width="58" />
+		<icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
+		<splash height="1136" platform="ios" src="res/screens/ios/Default-568h@2x~iphone.png" width="640" />
+		<splash height="1334" platform="ios" src="res/screens/ios/Default-667h.png" width="750" />
+		<splash height="2208" platform="ios" src="res/screens/ios/Default-736h.png" width="1242" />
+		<splash height="1242" platform="ios" src="res/screens/ios/Default-Landscape-736h.png" width="2208" />
+		<splash height="1536" platform="ios" src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048" />
+		<splash height="768" platform="ios" src="res/screens/ios/Default-Landscape~ipad.png" width="1024" />
+		<splash height="2048" platform="ios" src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" />
+		<splash height="1024" platform="ios" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
+		<splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
+		<splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
+	</platform>
 
     <splash src="splash.png" />
 
