@@ -21,6 +21,12 @@
     <!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
     <access origin="*" />
 
+	<universal-links>
+	    <host name="touchiddemo.mxapps.io">
+	        <path url="/link/*" />
+	    </host>
+	</universal-links>
+
     <!-- Force the default architecture for Android to ARM -->
     <plugin name="com.darktalker.cordova.screenshot" source="npm" spec="0.1.6" />
     <plugin name="com.telerik.plugins.nativepagetransitions" source="npm" spec="0.6.5" />
@@ -52,6 +58,10 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="2.9.11"/>
 	<plugin name="cordova-plugin-touch-id" source="npm" version="3.2.0"/>
 	<plugin name="cordova-plugin-android-fingerprint-auth" source="npm" version="1.4.0"/>
+	<plugin name="cordova-universal-links-plugin" source="npm" version="1.2.1"/>
+
+	<plugin name="de.appplant.cordova.plugin.printer" source="npm" version="0.7.3/>
+
 
         <plugin name="cordova-plugin-calendar" source="npm" spec="4.5.5">
             <param name="CALENDAR_USAGE_DESCRIPTION" value="This app needs to access your calendar" />
