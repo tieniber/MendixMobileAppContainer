@@ -60,8 +60,6 @@
 	<plugin name="cordova-plugin-android-fingerprint-auth" source="npm" version="1.4.0"/>
 	<plugin name="cordova-universal-links-plugin" source="npm" version="1.2.1"/>
 
-	<plugin name="de.appplant.cordova.plugin.printer" source="npm" version="0.7.3/>
-
 
         <plugin name="cordova-plugin-calendar" source="npm" spec="4.5.5">
             <param name="CALENDAR_USAGE_DESCRIPTION" value="This app needs to access your calendar" />
