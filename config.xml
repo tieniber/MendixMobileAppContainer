@@ -22,8 +22,8 @@
     <access origin="*" />
 
 	<universal-links>
-	    <host name="touchiddemo.mxapps.io">
-	        <path url="/link/*" />
+	    <host name="touchiddemo.mxapps.io" scheme="https">
+	        <path url="/link/*" event="deeplinkEvent"/>
 	    </host>
 	</universal-links>
 
