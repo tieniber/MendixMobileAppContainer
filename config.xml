@@ -15,7 +15,7 @@
     Instead, Phonegap Build derives the platform versions from the CLI
     defaults.
     -->
-    <preference name="phonegap-version" value="cli-6.5.0" />
+    <preference name="phonegap-version" value="cli-7.0.1" />
 
     <!-- allow assets to be loaded and open links in the app itself, see: http://phonegap.com/blog/2012/03/20/access-tags/ -->
     <!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
@@ -165,8 +165,6 @@
 		<icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
 		<splash src="res/screens/ios/Default@2x~universal~anyany.png" />
 	</platform>
-
-    <splash src="splash.png" />
 
 
 </widget>
