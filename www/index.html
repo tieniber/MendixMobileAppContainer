@@ -2,13 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Mendix App</title>
+        <title>My Philips news App</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
-    <link href="../www/css/bundle.css" rel="stylesheet"></head>
+
+        <link href="../www/css/bundle.css" rel="stylesheet"></head>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="css/philips.css">
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+        
+
     <body dir="ltr" class="mx-hybridapp">
         <div id="content"></div>
+
+        <!-- Added for connection errors -->
+        <div id="error-bar" class="hidden">
+            <p id="error-bar-message">Connection error</p>
+        </div>
 
         <div id="mx-app" class="mx-main-container">
             <div id="mxalert" class="mx-alert">
@@ -23,16 +35,49 @@
                 </div>
             </div>
 
-            <div id="mx-loader-container" class="mx-valign-table">
-                <div class="mx-valign-cell">
-                    <div class="mx-loader">
-                        <img src="img/loader.gif" />
-                        <div class="mx-message"></div>
+            <div id="mx-loader-container" class="mx-valign-table loading">
+                <div class="mx-message">Loading...</div>
+
+                <div id="load-sub">
+                </div>
+
+                <div id="load-first">
+                    <div class="slider">
+                        <div class="slider-item">
+                            <img src="img/p1.png">
+                            <figcaption>
+                                <h3>Menu</h3>
+                                <p>App Navigation</p>
+                            </figcaption>
+                        </div>
+                        <div class="slider-item">
+                            <img src="img/p2.png">
+                            <figcaption>
+                                <h3>Top News</h3>
+                                <p>Stay up to date with local and international news.</p>
+                            </figcaption>
+                        </div>
+                        <div class="slider-item">
+                            <img src="img/p3.png">
+                            <figcaption>
+                                <h3>Article Details</h3>
+                                <p>Details</p>
+                            </figcaption>
+                        </div>
+                        <div class="slider-item">
+                            <img src="img/p4.png">
+                            <figcaption>
+                                <h3>Topics and Related News</h3>
+                                <p>Check out the news items by topics subscribed and related items.</p>
+                            </figcaption>
+                        </div>
+                        
                     </div>
+                    <div class="loader"></div>
                 </div>
             </div>
         </div>
-
+ 
         <div id="mx-login-container" class="mx-hybridapp-wrapper">
           <div class="mx-hybridapp-login">
             <div id="mx-login-error" class="mx-hybridapp-title">Sign in</div>
@@ -62,5 +107,9 @@
         </div>
 
         <script src="cordova.js"></script>
-    <script type="text/javascript" src="../www/js/bundle.js"></script></body>
+        <script src="../www/js/bundle.js"></script></body>
+        <!-- <script src="js/mxmobile.js"></script> -->
+        <!-- <script src="js/myphilipsnews.js"></script> -->
+        <script src="js/philips.js"></script>
+    
 </html>

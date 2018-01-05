@@ -1,7 +1,8 @@
 {
-  "url": "https://myphilipsnews-test.mendixcloud.com",
+  "url": "https://tst.inside.myphilipsnews.philips.com",
   "enableOffline": true,
   "requirePin": false,
+  "updateAsync": false,
   "username": "",
   "password": ""
 }
