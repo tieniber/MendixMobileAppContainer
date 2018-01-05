@@ -61,7 +61,7 @@
 	<allow-intent href="*"/>
 
 	<!-- <plugin name="com.darktalker.cordova.screenshot" source="npm" version="0.1.5"/> -->
-	<plugin name="cordova-plugin-app-version" source="npm" version="1.0.0"/>
+	<plugin name="cordova-plugin-app-version" source="npm" version="0.1.9"/>
 	<!-- <plugin name="cordova-plugin-battery-status" source="npm" version="1.1.2" /> -->
 	<!-- <plugin name="cordova-plugin-camera" source="npm" version="2.2.0" /> -->
 	<!--ET REMOVED <plugin name="cordova-plugin-console" source="npm" version="1.0.4"/>-->
