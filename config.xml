@@ -51,13 +51,7 @@
     <plugin name="cordova-sqlite-storage-pgb" source="git" spec="https://github.com/mendix/Cordova-sqlite-storage-pgb.git#storage-master" />
     <plugin name="phonegap-plugin-push" source="npm" spec="1.5.3" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="2.9.11"/>
-
-
-
-
-
-
-
+    <plugin name="cordova-email-plugin" source="npm" spec="1.2.6" />
 
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
@@ -180,5 +174,5 @@
 
     <splash src="splash.png" />
 
-    
+
 </widget>
