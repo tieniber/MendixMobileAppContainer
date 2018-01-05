@@ -61,32 +61,32 @@
 	<allow-intent href="*"/>
 
 	<!-- <plugin name="com.darktalker.cordova.screenshot" source="npm" version="0.1.5"/> -->
-	<plugin name="cordova-plugin-app-version" source="npm" version="0.1.9"/>
+	<plugin name="cordova-plugin-app-version" source="npm" version="0.1.8"/>
 	<!-- <plugin name="cordova-plugin-battery-status" source="npm" version="1.1.2" /> -->
 	<!-- <plugin name="cordova-plugin-camera" source="npm" version="2.2.0" /> -->
-	<!--ET REMOVED <plugin name="cordova-plugin-console" source="npm" version="1.0.4"/>-->
+	<plugin name="cordova-plugin-console" source="npm" version="1.0.4"/>
 	<!-- <plugin name="cordova-plugin-contacts" source="npm" version="2.1.0" /> -->
-	<plugin name="cordova-plugin-device" source="npm" version="2.0.1"/>
+	<plugin name="cordova-plugin-device" source="npm" version="1.1.2"/>
 	<!-- <plugin name="cordova-plugin-device-motion" source="npm" version="1.2.1" /> -->
 	<!-- <plugin name="cordova-plugin-device-orientation" source="npm" version="1.0.3" /> -->
 	<!-- <plugin name="cordova-plugin-dialogs" source="npm" version="1.2.1" /> -->
-	<plugin name="cordova-plugin-file" source="npm" version="5.0.0"/>
-	<plugin name="cordova-plugin-file-transfer" source="npm" version="1.7.0"/>
+	<plugin name="cordova-plugin-file" source="npm" version="4.2.0"/>
+	<plugin name="cordova-plugin-file-transfer" source="npm" version="1.5.1"/>
 	<!-- <plugin name="cordova-plugin-geolocation" source="npm" version="2.2.0" /> -->
 	<!-- <plugin name="cordova-plugin-globalization" source="npm" version="1.0.3" /> -->
-	<plugin name="cordova-plugin-inappbrowser" source="npm" version="2.0.1"/>
+	<plugin name="cordova-plugin-inappbrowser" source="npm" version="1.4.0"/>
 	<!-- <plugin name="cordova-plugin-media-capture" source="npm" version="1.3.0" />  -->
-	<plugin name="cordova-plugin-media" source="npm" version="5.0.1" />
-	<plugin name="cordova-plugin-network-information" source="npm" version="2.0.1" />
+	<plugin name="cordova-plugin-media" source="npm" version="2.3.0" />
+	<plugin name="cordova-plugin-network-information" source="npm" version="1.2.1" />
 	<!-- <plugin name="cordova-plugin-secure-storage" source="npm" version="2.4.0" /> -->
-	<plugin name="cordova-plugin-splashscreen" source="npm" version="5.0.1"/>
-	<plugin name="cordova-plugin-statusbar" source="npm" version="2.4.1"/>
+	<plugin name="cordova-plugin-splashscreen" source="npm" version="3.2.2"/>
+	<plugin name="cordova-plugin-statusbar" source="npm" version="2.1.3"/>
 	<!-- <plugin name="cordova-plugin-vibration" source="npm" version="2.1.1" /> -->
 	<plugin name="cordova-plugin-zip" source="npm" version="3.1.0"/>
-	<plugin name="cordova-plugin-whitelist" source="npm" version="1.3.3"/>
+	<plugin name="cordova-plugin-whitelist" source="npm" version="1.2.2"/>
 	<!-- <plugin name="cordova-sqlite-evcore-extbuild-free" source="npm" version="0.8.0"/> -->
 	<!-- <plugin name="phonegap-plugin-barcodescanner" source="npm" version="6.0.1" /> -->
-	<plugin name="phonegap-plugin-push" source="npm" version="2.1.2"/>
+	<plugin name="phonegap-plugin-push" source="npm" version="1.5.3"/>
 	<plugin name="cordova-plugin-spinner" source="npm" spec="1.1.0" />
 
 
@@ -96,7 +96,7 @@
 	<plugin name="cordova-plugin-android-permissions" source="npm" spec="0.10.0" />
 	<plugin name="cordova-plugin-cookieemperor" spec="https://github.com/rtk/cordova-cookie-emperor.git" />
 	<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" spec="0.6.5" />
-	<plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" version="1.1.0" />
+    <plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" version="1.1.0" />
 	<plugin name="cordova-plugin-x-socialsharing" source="npm" version="5.0.11"/>
 	<plugin name="cordova-plugin-email" source="npm" version="1.2.6" />
 
