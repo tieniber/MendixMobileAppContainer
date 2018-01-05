@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.philips.ht.myphilipsnews.tst" version="1.0">
 
-	<name>Acc - My Philips news</name>
+	<name>Tst - My Philips news</name>
 
 	<description>My Philips news - Global Communications App</description>
 
@@ -98,7 +98,7 @@
 	<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" spec="0.6.5" />
     <plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" version="1.1.0" />
 	<plugin name="cordova-plugin-x-socialsharing" source="npm" version="5.0.11"/>
-	<plugin name="cordova-plugin-email" source="npm" version="1.2.6" />
+	<plugin name="cordova-plugin-email-composer" spec="https://github.com/katzer/cordova-plugin-email-composer.git" />
 
 	<plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.1" source="git" />
 
