@@ -98,7 +98,7 @@ a<?xml version="1.0" encoding="UTF-8" ?>
 	<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" spec="0.6.5" />
 	<plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" version="1.0.1" />
 	<plugin name="cordova-plugin-x-socialsharing" source="npm" version="5.0.11"/>
-	<plugin name="cordova-plugin-email" version="1.2.6" />
+	<plugin name="cordova-plugin-email" source="npm" version="1.2.6" />
 
 	<plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.1" source="git" />
 
