@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.tieniber.ddns.net.giggit"
+        id        = "com.philips.ht.myphilipsnews.tst"
         version   = "0.0.2" >
 
-    <name>Mx Testing</name>
+    <name>My Philips news</name>
 
-    <description></description>
+    <description>My Philips News - Global Communications App</description>
 
     <!--
     Current latest and default version
@@ -21,12 +21,6 @@
     <!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
     <access origin="*" />
 
-	<universal-links>
-	    <host name="touchiddemo.mxapps.io" scheme="https">
-	        <path url="/link/*" event="deeplinkEvent"/>
-	    </host>
-	</universal-links>
-
     <!-- Force the default architecture for Android to ARM -->
     <plugin name="com.darktalker.cordova.screenshot" source="npm" spec="0.1.6" />
     <plugin name="com.telerik.plugins.nativepagetransitions" source="npm" spec="0.6.5" />
@@ -36,6 +30,7 @@
     <plugin name="cordova-plugin-app-version" source="npm" spec="0.1.8" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="1.1.2" />
     <plugin name="cordova-plugin-console" source="npm" spec="1.0.3" />
+    <plugin name="cordova-plugin-cookieemperor" spec="https://github.com/rtk/cordova-cookie-emperor.git" />
     <plugin name="cordova-plugin-device" source="npm" spec="1.1.2" />
     <plugin name="cordova-plugin-device-motion" source="npm" spec="1.2.1" />
     <plugin name="cordova-plugin-device-orientation" source="npm" spec="1.0.3" />
@@ -47,48 +42,22 @@
     <plugin name="cordova-plugin-network-information" source="npm" spec="1.2.1" />
     <plugin name="cordova-plugin-secure-storage" source="npm" spec="2.4.0" />
     <plugin name="cordova-plugin-spinner" source="npm" spec="1.1.0" />
-    <plugin name="cordova-plugin-splashscreen" source="npm" spec="4.1.0" />
-    <plugin name="cordova-plugin-statusbar" source="npm" spec="2.3.0" />
+    <plugin name="cordova-plugin-splashscreen" source="npm" spec="3.2.2" />
+    <plugin name="cordova-plugin-statusbar" source="npm" spec="2.1.3" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="2.1.1" />
     <plugin name="cordova-plugin-x-socialsharing" source="npm" version="5.0.11"/>
     <plugin name="cordova-plugin-zip" source="npm" spec="3.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.2" />
-    <plugin name="cordova-sqlite-evcore-extbuild-free" source="npm" spec="0.8.0" />
+    <plugin name="cordova-sqlite-storage-pgb" source="git" spec="https://github.com/mendix/Cordova-sqlite-storage-pgb.git#storage-master" />
     <plugin name="phonegap-plugin-push" source="npm" spec="1.5.3" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="2.9.11"/>
-	<plugin name="cordova-plugin-touch-id" source="npm" version="3.2.0"/>
-	<plugin name="cordova-plugin-android-fingerprint-auth" source="npm" version="1.4.0"/>
-	<plugin name="cordova-universal-links-plugin" source="npm" version="1.2.1"/>
 
 
-        <plugin name="cordova-plugin-calendar" source="npm" spec="4.5.5">
-            <param name="CALENDAR_USAGE_DESCRIPTION" value="This app needs to access your calendar" />
-        </plugin>
 
-            <plugin name="cordova-plugin-camera" source="npm" spec="2.4.0">
-                <param name="CAMERA_USAGE_DESCRIPTION" value="This app needs to access your camera" />
-                <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="This app needs to access your photo library" />
-            </plugin>
 
-        <plugin name="cordova-plugin-contacts" source="npm" spec="2.3.0">
-            <param name="CONTACTS_USAGE_DESCRIPTION" value="This app needs to access your contacts" />
-        </plugin>
 
-                <plugin name="cordova-plugin-media-capture" source="npm" spec="1.4.2">
-                    <param name="CAMERA_USAGE_DESCRIPTION" value="This app needs to access your camera" />
-                    <param name="MICROPHONE_USAGE_DESCRIPTION" value="This app needs to access your microphone" />
-                    <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="This app needs to access your photo library" />
-                </plugin>
 
-        <plugin name="phonegap-plugin-barcodescanner" source="npm" spec="6.0.5" >
-            <param name="CAMERA_USAGE_DESCRIPTION" value="This app needs to access your camera" />
-        </plugin>
 
-        <plugin name="cordova-plugin-geolocation" source="npm" spec="2.2.0">
-            <param name="GEOLOCATION_USAGE_DESCRIPTION" value="This app needs to access your location" />
-        </plugin>
-
-        <plugin name="cordova-plugin-media" source="npm" spec="2.3.0" />
 
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
@@ -114,7 +83,43 @@
 
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
 
-        <plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" spec="1.1.0" />
+        <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+
+        <plugin name="cordova-plugin-wkwebview-engine-nextgen" source="npm" spec="^1.1.0" />
+
+        <platform name="ios">
+                <icon src="res/ios/icon-83.5-2x.png" width="167" height="167" />
+                <splash src="res/ios/screen-iphone-landscape-2x.png" width="960" height="640" />
+                <icon src="res/ios/icon-60.png" width="60" height="60" />
+                <icon src="res/ios/icon-60-2x.png" width="120" height="120" />
+                <splash src="res/ios/screen-iphone-landscape-568h-2x.png" width="1136" height="640" />
+                <splash src="res/ios/screen-iphone-landscape-667h.png" width="1334" height="750" />
+                <icon src="res/ios/icon-40.png" width="40" height="40" />
+                <icon src="res/ios/icon-76-2x.png" width="152" height="152" />
+                <splash src="res/ios/screen-ipad-landscape.png" width="1024" height="768" />
+                <icon src="res/ios/icon-60-3x.png" width="180" height="180" />
+                <icon src="res/ios/icon-small-2x.png" width="58" height="58" />
+                <icon src="res/ios/icon-small-3x.png" width="87" height="87" />
+                <splash src="res/ios/screen-iphone-portrait-667h.png" width="750" height="1334" />
+                <splash src="res/ios/screen-iphone-portrait-568h-2x.png" width="640" height="1136" />
+                <icon src="res/ios/icon-50-2x.png" width="100" height="100" />
+                <splash src="res/ios/screen-ipad-portrait.png" width="768" height="1024" />
+                <icon src="res/ios/icon.png" width="57" height="57" />
+                <icon src="res/ios/icon-72.png" width="72" height="72" />
+                <splash src="res/ios/screen-iphone-landscape.png" width="480" height="320" />
+                <splash src="res/ios/screen-iphone-portrait-2x.png" width="640" height="960" />
+                <icon src="res/ios/icon-40-2x.png" width="80" height="80" />
+                <splash src="res/ios/screen-ipad-portrait-2x.png" width="1536" height="2048" />
+                <icon src="res/ios/icon-72-2x.png" width="144" height="144" />
+                <icon src="res/ios/icon-76.png" width="76" height="76" />
+                <icon src="res/ios/icon-50.png" width="50" height="50" />
+                <splash src="res/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
+                <splash src="res/ios/screen-iphone-portrait-736h.png" width="1242" height="2208" />
+                <icon src="res/ios/icon-small.png" width="29" height="29" />
+                <splash src="res/ios/screen-iphone-portrait.png" width="320" height="480" />
+                <splash src="res/ios/screen-ipad-landscape-2x.png" width="2048" height="1536" />
+                <icon src="res/ios/icon-2x.png" width="114" height="114" />
+        </platform>
 
         <!-- The gradle build tool is required for the phonegap-plugin-push -->
         <preference name="android-build-tool" value="gradle" />
@@ -124,54 +129,56 @@
 
 
         <plugin name="cordova-plugin-crosswalk-webview" source="npm" spec="2.3.0" />
+
+        <!-- This plugin should be removed if the project does not use Crosswalk -->
+        <plugin name="com.crosswalk.cookies" spec="https://github.com/dokoto/crosswalk-cookies.git" />
+        <!-- -->
+
         <plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.2" />
+        <plugin name="cordova-plugin-android-permissions" source="npm" version="0.10.0" />
 
-		<platform name="android">
-		<icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
-		<icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
-		<icon density="hdpi" src="res/icons/android/drawable-hdpi-icon.png" />
-		<icon density="xhdpi" src="res/icons/android/drawable-xhdpi-icon.png" />
-		<icon density="xxhdpi" src="res/icons/android/drawable-xxhdpi-icon.png" />
-		<icon density="xxxhdpi" src="res/icons/android/drawable-xxxhdpi-icon.png" />
-		<splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
-		<splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />
-		<splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi-screen.png" />
-		<splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi-screen.png" />
-		<splash density="land-xxhdpi" src="res/screens/android/drawable-land-xxhdpi-screen.png" />
-		<splash density="land-xxxhdpi" src="res/screens/android/drawable-land-xxxhdpi-screen.png" />
-		<splash density="port-ldpi" src="res/screens/android/drawable-port-ldpi-screen.png" />
-		<splash density="port-mdpi" src="res/screens/android/drawable-port-mdpi-screen.png" />
-		<splash density="port-hdpi" src="res/screens/android/drawable-port-hdpi-screen.png" />
-		<splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
-		<splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
-		<splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
-	</platform>
-	<platform name="ios">
-		<icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
-		<icon height="114" platform="ios" src="res/icons/ios/icon@2x.png" width="114" />
-		<icon height="40" platform="ios" src="res/icons/ios/icon-40.png" width="40" />
-		<icon height="80" platform="ios" src="res/icons/ios/icon-40@2x.png" width="80" />
-		<icon height="50" platform="ios" src="res/icons/ios/icon-50.png" width="50" />
-		<icon height="100" platform="ios" src="res/icons/ios/icon-50@2x.png" width="100" />
-		<icon height="60" platform="ios" src="res/icons/ios/icon-60.png" width="60" />
-		<icon height="120" platform="ios" src="res/icons/ios/icon-60@2x.png" width="120" />
-		<icon height="180" platform="ios" src="res/icons/ios/icon-60@3x.png" width="180" />
-		<icon height="72" platform="ios" src="res/icons/ios/icon-72.png" width="72" />
-		<icon height="144" platform="ios" src="res/icons/ios/icon-72@2x.png" width="144" />
-		<icon height="76" platform="ios" src="res/icons/ios/icon-76.png" width="76" />
-		<icon height="152" platform="ios" src="res/icons/ios/icon-76@2x.png" width="152" />
-		<icon height="29" platform="ios" src="res/icons/ios/icon-small.png" width="29" />
-		<icon height="58" platform="ios" src="res/icons/ios/icon-small@2x.png" width="58" />
-		<icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
-		<splash src="res/screens/ios/Default@2x~iphone~anyany.png" />
-		<splash src="res/screens/ios/Default@2x~iphone~comany.png" />
-		<splash src="res/screens/ios/Default@2x~iphone~comcom.png" />
-		<splash src="res/screens/ios/Default@3x~iphone~anyany.png" />
-		<splash src="res/screens/ios/Default@3x~iphone~anycom.png" />
-		<splash src="res/screens/ios/Default@3x~iphone~comany.png" />
-		<splash src="res/screens/ios/Default@2x~ipad~anyany.png" />
-		<splash src="res/screens/ios/Default@2x~ipad~comany.png" />
-	</platform>
+        <preference name="android-targetSdkVersion" value="23" />
 
+        <platform name="android">
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-xxxhdpi-landscape.png" qualifier="land-xxxhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-hdpi-landscape.png" qualifier="land-hdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-xxhdpi-portrait.png" qualifier="port-xxhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-ldpi-portrait.png" qualifier="port-ldpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <icon src="res/android/icon-144-xxhdpi.png" qualifier="xxhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-mdpi-landscape.png" qualifier="land-mdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-ldpi-landscape.png" qualifier="land-ldpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <icon src="res/android/icon-72-hdpi.png" qualifier="hdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <icon src="res/android/icon-36-ldpi.png" qualifier="ldpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <icon src="res/android/icon-48-mdpi.png" qualifier="mdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <icon src="res/android/icon-192-xxxhdpi.png" qualifier="xxxhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-xxhdpi-landscape.png" qualifier="land-xxhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-xhdpi-landscape.png" qualifier="land-xhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-mdpi-portrait.png" qualifier="port-mdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-xhdpi-portrait.png" qualifier="port-xhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-xxxhdpi-portrait.png" qualifier="port-xxxhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <icon src="res/android/icon-96-xhdpi.png" qualifier="xhdpi"/>
+                <!-- Icon definitions - for more details: http://developer.android.com/guide/topics/resources/providing-resources.html -->
+                <splash src="res/android/screen-hdpi-portrait.png" qualifier="port-hdpi"/>
+        </platform>
 
+    <splash src="splash.png" />
+
+    
 </widget>

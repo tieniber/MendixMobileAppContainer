@@ -1,10 +1,7 @@
 {
-  "url": "http://10.104.106.52:8080/",
-  "hybridTabletProfile": "",
-  "hybridPhoneProfile": "",
-  "enableOffline": false,
-  "persistentSession": {
-	  "enabled":true,
-	  "forceSecurity":true
-	}
+  "url": "http://10.104.104.234:8000",
+  "enableOffline": true,
+  "requirePin": false,
+  "username": "",
+  "password": ""
 }
