@@ -5,6 +5,6 @@
   "enableOffline": false,
   "persistentSession": {
 	  "enabled":true,
-	  "forceSecurity":true
+	  "forceSecurity":false
 	}
 }
