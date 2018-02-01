@@ -19,7 +19,8 @@
 
     <!-- allow assets to be loaded and open links in the app itself, see: http://phonegap.com/blog/2012/03/20/access-tags/ -->
     <!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
-    <access origin="*" />
+    <access origin='*' allows-arbitrary-loads-for-media='true' allows-arbitrary-loads-in-web-content='true' allows-local-networking='true' />
+
 
 	<universal-links>
 	    <host name="touchiddemo.mxapps.io" scheme="https">
