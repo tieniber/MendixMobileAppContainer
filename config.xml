@@ -127,6 +127,8 @@
         <plugin name="cordova-plugin-crosswalk-webview" source="npm" spec="2.3.0" />
         <plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.2" />
 
+        <plugin name="cordova-plugin-local-notification" spec="https://github.com/katzer/cordova-plugin-local-notifications.git#0.8.5"/>
+
 		<platform name="android">
 		<icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
 		<icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
