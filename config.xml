@@ -179,8 +179,7 @@
 		<splash src="res/screens/ios/Default@2x~ipad~comany.png" />
 	</platform>
 
-
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+        <string>Sharing location of an event</string>
+    </edit-config>
 </widget>
-<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-    <string>Sharing location of an event</string>
-</edit-config>
