@@ -91,6 +91,8 @@
         </plugin>
 
         <plugin name="cordova-plugin-media" source="npm" spec="2.3.0" />
+        
+        <plugin name="cordova-plugin-request-location-accuracy" source="npm" spec="2.2.3" />
 
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
