@@ -67,23 +67,6 @@
 			<button id="mx-forgot-pin" class="mx-hybridapp-forget-button mx-hybridapp-link">Forgot my PIN</button>
 		</div>
 	</div>
-	<script>
-		var branchInit = function() {
-			// Branch initialization
-			Branch.initSession().then(function(data) {
-				if (data["+clicked_branch_link"]) {
-					// read deep link data on click
-					alert("Deep Link Data: " + JSON.stringify(data));
-				}
-			});
-		}
-		document.addEventListener("deviceready", function() {
-			branchInit();
-		}, false);
-		document.addEventListener("resume", function() {
-			branchInit();
-		}, false);
-	</script>
 	<script src="cordova.js"></script>
 	<script type="text/javascript" src="../www/js/bundle.js"></script>
 </body>
