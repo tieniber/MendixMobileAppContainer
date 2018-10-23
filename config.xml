@@ -82,6 +82,12 @@
             <link-domain value="erictest.app.link" />
             <ios-team-release value="F5YZDS39M4" />
         </branch-config>
+
+        <config-file platform="ios" target="Entitlements-*.plist" parent="com.apple.developer.associated-domains" mode="replace">
+            <array>  
+                <string>applinks:erictest.app.link</string>
+            </array>
+        </config-file>
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
