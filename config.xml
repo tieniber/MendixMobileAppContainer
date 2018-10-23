@@ -86,7 +86,7 @@
         <plugin name="cordova-plugin-request-location-accuracy" source="npm" spec="2.2.3" />
         <plugin name="branch-cordova-sdk" spec="^2.6.0" />
         <branch-config>
-            <branch-key value="key_test_noRolrKpyEVHTal94tL3JcgnBrbnFxB2" />
+            <branch-key value="key_live_idOcesSjyzNMRde5ZqKWuclmFFefFxvQ" />
             <uri-scheme value="mxtesting" />
             <link-domain value="erictest.app.link" />
             <ios-team-release value="F5YZDS39M4" />
