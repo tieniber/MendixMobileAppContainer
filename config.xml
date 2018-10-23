@@ -74,9 +74,7 @@
         <plugin name="cordova-plugin-geolocation" source="npm" spec="4.0.1">
             <param name="GEOLOCATION_USAGE_DESCRIPTION" value="This app needs to access your location" />
         </plugin>
-
-        <plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
-        
+       
         <plugin name="cordova-plugin-request-location-accuracy" source="npm" spec="2.2.3" />
         <plugin name="branch-cordova-sdk" spec="^2.6.0" />
         <branch-config>
