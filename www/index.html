@@ -70,7 +70,7 @@
 	<script>
 		document.addEventListener("deviceready", function() {
 			console.log("adding subscriptions");
-			universalLinks.subscribe("deeplinkEvent", function(eventData) {
+			universalLinks.subscribe(null, function(eventData) {
 				// do some work
 				console.log('Did launch application from the link: ' + eventData.url);
 				var oReq = new XMLHttpRequest();
