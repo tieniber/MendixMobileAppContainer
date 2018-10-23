@@ -92,13 +92,7 @@
         <plugin name="cordova-plugin-media" source="npm" spec="2.3.0" />
         
         <plugin name="cordova-plugin-request-location-accuracy" source="npm" spec="2.2.3" />
-        <plugin name="branch-cordova-sdk" spec="^2.6.0" />
-        <branch-config>
-            <branch-key value="key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3" />
-            <uri-scheme value="branchcordova" />
-            <link-domain value="cordova.app.link" />
-            <ios-team-release value="PW4Q8885U7" />
-        </branch-config>
+
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
