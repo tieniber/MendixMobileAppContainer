@@ -24,7 +24,7 @@
 
 	<universal-links>
 	    <host name="geolocationtesting-sandbox.mxapps.io" scheme="https">
-	        <path url="/link/*" event="deeplinkEvent"/>
+	        <path url="*" event="deeplinkEvent"/>
 	    </host>
 	</universal-links>
 
