@@ -67,12 +67,6 @@
             <param name="CONTACTS_USAGE_DESCRIPTION" value="This app needs to access your contacts" />
         </plugin>
 
-                <plugin name="cordova-plugin-media-capture" source="npm" spec="3.0.2">
-                    <param name="CAMERA_USAGE_DESCRIPTION" value="This app needs to access your camera" />
-                    <param name="MICROPHONE_USAGE_DESCRIPTION" value="This app needs to access your microphone" />
-                    <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="This app needs to access your photo library" />
-                </plugin>
-
         <plugin name="phonegap-plugin-barcodescanner" source="npm" spec="8.0.0" >
             <param name="CAMERA_USAGE_DESCRIPTION" value="This app needs to access your camera" />
         </plugin>
