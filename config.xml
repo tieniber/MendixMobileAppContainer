@@ -59,8 +59,7 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="2.9.11"/>
 	<plugin name="cordova-plugin-touch-id" source="npm" version="3.2.0"/>
 	<plugin name="cordova-plugin-android-fingerprint-auth" source="npm" version="1.4.0"/>
-	<plugin name="cordova-universal-links-plugin" source="npm" version="1.2.1"/>
-    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="2.9.11"/>
+	<plugin name="cordova-universal-links-plugin" source="git" spec="https://github.com/flipflopapp/cordova-universal-links-plugin.git"/>
     <plugin name="cordova-plugin-ble-central" source="npm"/>
 
         <plugin name="cordova-plugin-calendar" source="npm" spec="4.5.5">
