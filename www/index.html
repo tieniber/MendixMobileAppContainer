@@ -67,7 +67,24 @@
 			<button id="mx-forgot-pin" class="mx-hybridapp-forget-button mx-hybridapp-link">Forgot my PIN</button>
 		</div>
 	</div>
+	<script>
+		document.addEventListener("deviceready", function() {
+			console.log("adding subscriptions");
+			universalLinks.subscribe("deeplinkEvent", function(eventData) {
+				// do some work
+				console.log('Did launch application from the link: ' + eventData.url);
+				var oReq = new XMLHttpRequest();
+				// false = acync -> should be called AFTER setting deeplink
+				oReq.open("get", eventData.url, false);
+				oReq.send();
 
+				//detect if iOS for handle deeplink
+				if (device.platform === 'iOS' || device.platform === 'Android') {
+					window.location.reload();
+				}
+			});
+		}, false);
+	</script>
 	<script src="cordova.js"></script>
 	<script type="text/javascript" src="../www/js/bundle.js"></script>
 </body>

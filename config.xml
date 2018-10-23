@@ -23,7 +23,7 @@
 
 
 	<universal-links>
-	    <host name="touchiddemo.mxapps.io" scheme="https">
+	    <host name="geolocationtesting-sandbox.mxapps.io" scheme="https">
 	        <path url="/link/*" event="deeplinkEvent"/>
 	    </host>
 	</universal-links>
@@ -93,7 +93,13 @@
         <plugin name="cordova-plugin-media" source="npm" spec="2.3.0" />
         
         <plugin name="cordova-plugin-request-location-accuracy" source="npm" spec="2.2.3" />
-
+        <plugin name="branch-cordova-sdk" spec="^2.6.0" />
+        <branch-config>
+            <branch-key value="key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3" />
+            <uri-scheme value="branchcordova" />
+            <link-domain value="cordova.app.link" />
+            <ios-team-release value="PW4Q8885U7" />
+        </branch-config>
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
@@ -178,8 +184,4 @@
 		<splash src="res/screens/ios/Default@2x~ipad~anyany.png" />
 		<splash src="res/screens/ios/Default@2x~ipad~comany.png" />
 	</platform>
-
-    <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-        <string>Sharing location of an event</string>
-    </edit-config>
 </widget>
