@@ -68,21 +68,20 @@
 		</div>
 	</div>
 	<script>
-		document.addEventListener("deviceready", function() {
-			console.log("adding subscriptions");
-			universalLinks.subscribe(null, function(eventData) {
-				// do some work
-				console.log('Did launch application from the link: ' + eventData.url);
-				var oReq = new XMLHttpRequest();
-				// false = acync -> should be called AFTER setting deeplink
-				oReq.open("get", eventData.url, false);
-				oReq.send();
-
-				//detect if iOS for handle deeplink
-				if (device.platform === 'iOS' || device.platform === 'Android') {
-					window.location.reload();
+		var branchInit = function() {
+			// Branch initialization
+			Branch.initSession().then(function(data) {
+				if (data["+clicked_branch_link"]) {
+					// read deep link data on click
+					alert("Deep Link Data: " + JSON.stringify(data));
 				}
 			});
+		}
+		document.addEventListener("deviceready", function() {
+			branchInit();
+		}, false);
+		document.addEventListener("resume", function() {
+			branchInit();
 		}, false);
 	</script>
 	<script src="cordova.js"></script>

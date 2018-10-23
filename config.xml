@@ -21,13 +21,6 @@
     <!-- Issue 204079: Allow retrieval of any resource. Custom widgets can point to anything. -->
     <access origin='*' allows-arbitrary-loads-for-media='true' allows-arbitrary-loads-in-web-content='true' allows-local-networking='true' />
 
-
-	<universal-links>
-	    <host name="geolocationtesting-sandbox.mxapps.io" scheme="https">
-	        <path url="/link/*"/>
-	    </host>
-	</universal-links>
-
     <!-- Force the default architecture for Android to ARM -->
     <plugin name="com.darktalker.cordova.screenshot" source="npm" spec="0.1.6" />
     <plugin name="com.telerik.plugins.nativepagetransitions" source="npm" spec="0.6.5" />
@@ -59,7 +52,6 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="2.9.11"/>
 	<plugin name="cordova-plugin-touch-id" source="npm" version="3.2.0"/>
 	<plugin name="cordova-plugin-android-fingerprint-auth" source="npm" version="1.4.0"/>
-	<plugin name="cordova-universal-links-plugin" source="git" spec="https://github.com/flipflopapp/cordova-universal-links-plugin.git"/>
     <plugin name="cordova-plugin-ble-central" source="npm"/>
 
         <plugin name="cordova-plugin-calendar" source="npm" spec="4.5.5">
@@ -92,7 +84,13 @@
         <plugin name="cordova-plugin-media" source="npm" spec="2.3.0" />
         
         <plugin name="cordova-plugin-request-location-accuracy" source="npm" spec="2.2.3" />
-
+        <plugin name="branch-cordova-sdk" spec="^2.6.0" />
+        <branch-config>
+            <branch-key value="key_test_noRolrKpyEVHTal94tL3JcgnBrbnFxB2" />
+            <uri-scheme value="mxtesting" />
+            <link-domain value="erictest.app.link" />
+            <ios-team-release value="F5YZDS39M4" />
+        </branch-config>
         <!-- On iOS, the statusbar is transparent by default and is drawn over the top of our app. -->
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
