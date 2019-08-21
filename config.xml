@@ -33,8 +33,8 @@
     <plugin name="cordova-plugin-device-motion" source="npm" spec="2.0.1" />
     <plugin name="cordova-plugin-device-orientation" source="npm" spec="2.0.1" />
     <plugin name="cordova-plugin-dialogs" source="npm" spec="2.0.1" />
-    <plugin name="cordova-plugin-file" source="npm" spec="4.2.0" />
-    <plugin name="cordova-plugin-file-transfer" source="npm" spec="1.5.1" />
+    <plugin name="cordova-plugin-file" source="npm" spec="6.0.0" />
+    <plugin name="cordova-plugin-file-transfer" source="npm" spec="1.7.1" />
     <plugin name="cordova-plugin-globalization" source="npm" spec="1.11.0" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" spec="3.0.0" />
     <plugin name="cordova-plugin-network-information" source="npm" spec="2.0.1" />
@@ -49,7 +49,7 @@
     <plugin name="cordova-sqlite-evcore-extbuild-free" source="npm" spec="0.8.0" />
     <plugin name="phonegap-plugin-push" source="npm" spec="2.2.3" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" version="4.2.2"/>
-	<plugin name="cordova-plugin-touch-id" source="npm" version="3.3.1"/>
+	<plugin na me="cordova-plugin-touch-id" source="npm" version="3.3.1"/>
 	<plugin name="cordova-plugin-android-fingerprint-auth" source="npm" version="1.4.5"/>
     <plugin name="cordova-plugin-ble-central" source="npm"/>
     <plugin name="cordova-clipboard" source="npm" spec="1.3.0" />
